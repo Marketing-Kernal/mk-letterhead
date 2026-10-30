@@ -674,12 +674,12 @@ textarea {
 
 /* Letter Body */
 .sheet-body {
-  flex: 1;
-  font-size: 12.5px;
-  line-height: 1.65;
+  font-size: 13px;
+  line-height: 1.72;
   color: var(--mk-text-body);
   position: relative;
   z-index: 2;
+  margin-bottom: 24px;
 }
 
 .salutation {
@@ -689,12 +689,12 @@ textarea {
 }
 
 .body-content p {
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   text-align: justify;
 }
 
 .body-content h4 {
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 700;
   color: var(--mk-obsidian);
   margin-top: 14px;
@@ -704,11 +704,11 @@ textarea {
 .body-content ol,
 .body-content ul {
   margin-left: 20px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .body-content li {
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 
 .body-content strong {
@@ -717,8 +717,8 @@ textarea {
 
 /* Signatory & Closure Block */
 .sheet-signatory-block {
-  margin-top: 22px;
-  margin-bottom: 24px;
+  margin-top: 28px;
+  margin-bottom: 28px;
   page-break-inside: avoid;
   position: relative;
   z-index: 2;
@@ -731,7 +731,7 @@ textarea {
 }
 
 .for-company {
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 700;
   color: var(--mk-obsidian);
   margin-bottom: 4px;
@@ -755,9 +755,9 @@ textarea {
 }
 
 .signatory-line {
-  width: 200px;
-  height: 1px;
-  background: var(--mk-purple-border);
+  width: 220px;
+  height: 1.5px;
+  background: #334155; /* Crisp dark slate line visible on any printer */
   margin-bottom: 6px;
 }
 
@@ -765,6 +765,14 @@ textarea {
   font-weight: 700;
   font-size: 13px;
   color: var(--mk-obsidian);
+}
+
+.seal-mark-tag {
+  font-size: 10px;
+  font-weight: 600;
+  color: #64748B;
+  letter-spacing: 0.3px;
+  margin-top: 2px;
 }
 
 .signatory-title {
@@ -788,7 +796,7 @@ textarea {
 
 .footer-divider {
   height: 1px;
-  background: linear-gradient(90deg, #E9D5FF 0%, #CBD5E1 50%, #E9D5FF 100%);
+  background: #CBD5E1;
   margin-bottom: 10px;
 }
 
@@ -796,17 +804,17 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  font-size: 8.5px;
-  color: #64748B;
-  line-height: 1.45;
+  font-size: 8.8px;
+  color: #475569;
+  line-height: 1.5;
 }
 
 .footer-left strong {
-  color: var(--mk-obsidian);
+  color: #0F172A;
 }
 
 .confidential-text {
-  color: #94A3B8;
+  color: #64748B;
 }
 
 .page-indicator {

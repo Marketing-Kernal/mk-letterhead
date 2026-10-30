@@ -353,6 +353,7 @@ const toggleWatermark = document.getElementById("toggleWatermark");
 const templatePreset = document.getElementById("templatePreset");
 const printBtn = document.getElementById("printBtn");
 const resetBtn = document.getElementById("resetBtn");
+const saveJsonBtn = document.getElementById("saveJsonBtn");
 
 // DOM References - Preview View
 const viewDocType = document.getElementById("viewDocType");
@@ -521,6 +522,58 @@ printBtn.addEventListener("click", () => {
   window.print();
 });
 
+// Save / Export Letterhead Data as JSON
+saveJsonBtn.addEventListener("click", () => {
+  const docData = {
+    docType: inputDocType.value,
+    docRef: inputDocRef.value,
+    date: inputDate.value,
+    recipient: {
+      name: inputRecipientName.value,
+      title: inputRecipientTitle.value,
+      company: inputRecipientCompany.value,
+      address: inputRecipientAddress.value
+    },
+    subject: inputSubject.value,
+    salutation: inputSalutation.value,
+    body: inputBody.value,
+    signatory: {
+      preset: signatoryPreset.value,
+      name: inputSignatoryName.value,
+      title: inputSignatoryTitle.value,
+      department: inputSignatoryDept.value
+    },
+    options: {
+      includeSignature: toggleSignature.checked,
+      includeWatermark: toggleWatermark.checked
+    },
+    metadata: {
+      companyName: "Marketing Kernal Private Limited",
+      cin: "U62011ME2026PTC477307",
+      incorporationDate: "22-10-2026",
+      registeredAddress: "Awasti Layout, Big Umari, Jatherpeth, Akola, Maharashtra, India, - 444005",
+      website: "https://marketingkernal.com",
+      email: "info@marketingkernal.com",
+      phone: "+91 9172648748",
+      exportedAt: new Date().toISOString()
+    }
+  };
+
+  const jsonString = JSON.stringify(docData, null, 2);
+  const blob = new Blob([jsonString], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  
+  // Format clean filename: e.g. "MK-2026-DECL-DSC-001.json"
+  const cleanRef = (inputDocRef.value || "letterhead").replace(/[^a-zA-Z0-9_-]/g, "_");
+  a.href = url;
+  a.download = `${cleanRef}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+
 // ==============================================================================
 // SMART DOCUMENT IMPORT & AI FORMATTER LOGIC
 // ==============================================================================
@@ -606,8 +659,48 @@ async function handleFile(file) {
       } else {
         showStatus("PDF parser loading. Please paste text directly if offline.", "error");
       }
+    } else if (ext === "json") {
+      const text = await file.text();
+      try {
+        const data = JSON.parse(text);
+        if (data.docType) inputDocType.value = data.docType;
+        if (data.docRef) inputDocRef.value = data.docRef;
+        if (data.date) inputDate.value = data.date;
+        if (data.recipient) {
+          inputRecipientName.value = data.recipient.name || "";
+          inputRecipientTitle.value = data.recipient.title || "";
+          inputRecipientCompany.value = data.recipient.company || "";
+          inputRecipientAddress.value = data.recipient.address || "";
+        }
+        if (data.subject) inputSubject.value = data.subject;
+        if (data.salutation) inputSalutation.value = data.salutation;
+        if (data.body) inputBody.value = data.body;
+        if (data.signatory) {
+          if (data.signatory.preset && SIGNATORIES[data.signatory.preset]) {
+            signatoryPreset.value = data.signatory.preset;
+          }
+          inputSignatoryName.value = data.signatory.name || SIGNATORIES.vaibhav.name;
+          inputSignatoryTitle.value = data.signatory.title || SIGNATORIES.vaibhav.title;
+          inputSignatoryDept.value = data.signatory.department || SIGNATORIES.vaibhav.dept;
+        }
+        if (data.options) {
+          if (typeof data.options.includeSignature === "boolean") {
+            toggleSignature.checked = data.options.includeSignature;
+          }
+          if (typeof data.options.includeWatermark === "boolean") {
+            toggleWatermark.checked = data.options.includeWatermark;
+          }
+        }
+        updatePreview();
+        showStatus(`Restored letterhead data from "${file.name}"!`, "success");
+        setTimeout(closeModal, 600);
+        return;
+      } catch (jsonErr) {
+        importRawText.value = text;
+        showStatus(`Loaded raw JSON text from "${file.name}". Click "Apply to Letterhead" below.`, "info");
+      }
     } else {
-      // Plain text, markdown, json
+      // Plain text, markdown
       const text = await file.text();
       importRawText.value = text;
       showStatus(`Loaded "${file.name}". Click "Apply to Letterhead" below.`, "success");

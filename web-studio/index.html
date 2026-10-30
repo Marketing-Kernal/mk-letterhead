@@ -161,30 +161,31 @@
 
       <div class="panel-section">
         <h3 class="section-title">Signatory &amp; Authentication</h3>
-        <div class="form-row">
-          <div class="form-group flex-1">
-            <label for="signatoryPreset">Signatory Preset</label>
-            <select id="signatoryPreset" class="select-input">
-              <option value="vaibhav" selected>Mr. Vaibhav Palhade (Director, Marketing Kernal Private Limited)</option>
-              <option value="pratyush">Pratyush Shrivastava (Co-Founder &amp; Director)</option>
-              <option value="tejas">Tejas Guruo (Co-Founder &amp; Director)</option>
-              <option value="custom">Custom Signatory...</option>
-            </select>
-          </div>
+        
+        <div class="form-group">
+          <label for="signatoryPreset">Signatory Preset</label>
+          <select id="signatoryPreset" class="select-input">
+            <option value="vaibhav" selected>Mr. Vaibhav Palhade (Director, Marketing Kernal Private Limited)</option>
+            <option value="pratyush">Pratyush Shrivastava (Co-Founder &amp; Director)</option>
+            <option value="tejas">Tejas Guruo (Co-Founder &amp; Director)</option>
+            <option value="custom">Custom Signatory...</option>
+          </select>
         </div>
+
+        <div class="form-group">
+          <label for="inputSignatoryName">Signatory Name (Full Legal Name)</label>
+          <input type="text" id="inputSignatoryName" value="Mr. Vaibhav Palhade" class="enlarged-input" placeholder="e.g. Mr. Vaibhav Palhade">
+        </div>
+
         <div class="form-row">
-          <div class="form-group flex-1">
-            <label for="inputSignatoryName">Signatory Name</label>
-            <input type="text" id="inputSignatoryName" value="Mr. Vaibhav Palhade">
-          </div>
           <div class="form-group flex-1">
             <label for="inputSignatoryTitle">Designation</label>
             <input type="text" id="inputSignatoryTitle" value="Director">
           </div>
-        </div>
-        <div class="form-group">
-          <label for="inputSignatoryDept">Organization / Department</label>
-          <input type="text" id="inputSignatoryDept" value="Marketing Kernal Private Limited">
+          <div class="form-group flex-1">
+            <label for="inputSignatoryDept">Organization / Department</label>
+            <input type="text" id="inputSignatoryDept" value="Marketing Kernal Private Limited">
+          </div>
         </div>
 
         <!-- Toggles -->

@@ -6,7 +6,7 @@
   <title>Marketing Kernal - Corporate Letterhead Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,9 +14,9 @@
   <!-- Studio Top Navigation Bar (Hidden when printing) -->
   <header class="studio-nav no-print">
     <div class="nav-brand">
-      <img src="../assets/logo-icon.svg" alt="MK Emblem" class="nav-logo">
+      <img src="../assets/mk-icon.png" alt="Marketing Kernal Emblem" class="nav-logo">
       <div class="nav-title-group">
-        <span class="nav-title">MARKETING KERNAL</span>
+        <span class="nav-title">MARKETING <span class="nav-title-accent">KERNAL</span></span>
         <span class="nav-badge">Letterhead Studio</span>
       </div>
     </div>
@@ -24,7 +24,7 @@
     <div class="nav-actions">
       <!-- Quick Template Selector -->
       <div class="preset-dropdown">
-        <label for="templatePreset">Load Preset:</label>
+        <label for="templatePreset">Preset:</label>
         <select id="templatePreset" class="select-input">
           <option value="formal">Official Correspondence</option>
           <option value="proposal">Client Proposal &amp; SOW</option>
@@ -52,6 +52,18 @@
     
     <!-- Left Panel: Interactive Form Editor (Hidden when printing) -->
     <aside class="editor-panel no-print">
+      
+      <!-- Palette & Theme Notice -->
+      <div class="brand-pill-banner">
+        <div class="palette-dots">
+          <span class="dot dot-deep" title="#5A09D1 Royal Purple"></span>
+          <span class="dot dot-mid" title="#7C1BF0 Imperial Violet"></span>
+          <span class="dot dot-glow" title="#9E2CFE Ultraviolet"></span>
+          <span class="dot dot-dark" title="#090714 Obsidian"></span>
+        </div>
+        <span>Official Ultraviolet &amp; Obsidian Identity</span>
+      </div>
+
       <div class="panel-section">
         <h3 class="section-title">Document Metadata</h3>
         
@@ -62,7 +74,7 @@
           </div>
           <div class="form-group flex-1">
             <label for="inputDocRef">Reference No.</label>
-            <input type="text" id="inputDocRef" value="MK/2026/DOC-108">
+            <input type="text" id="inputDocRef" value="MK/2026/CORR-102">
           </div>
         </div>
 
@@ -98,11 +110,11 @@
         <h3 class="section-title">Letter Subject &amp; Content</h3>
         <div class="form-group">
           <label for="inputSubject">Subject Line</label>
-          <input type="text" id="inputSubject" value="Strategic Partnership in Generative Engine Optimization (GEO)">
+          <input type="text" id="inputSubject" value="Strategic Partnership in Generative Engine Optimization (GEO) &amp; Entity Discovery">
         </div>
         <div class="form-group">
           <label for="inputSalutation">Salutation</label>
-          <input type="text" id="inputSalutation" value="Dear Strategic Partners,">
+          <input type="text" id="inputSalutation" value="Dear Enterprise Growth Team,">
         </div>
         <div class="form-group">
           <label for="inputBody">Body Text (HTML / Paragraphs supported)</label>
@@ -135,18 +147,18 @@
         </div>
         <div class="form-group">
           <label for="inputSignatoryDept">Department</label>
-          <input type="text" id="inputSignatoryDept" value="Executive Leadership &amp; Growth">
+          <input type="text" id="inputSignatoryDept" value="Executive Leadership &amp; Growth Strategy">
         </div>
 
         <!-- Toggles -->
         <div class="checkbox-group">
           <label class="checkbox-label">
             <input type="checkbox" id="toggleSignature" checked>
-            <span>Include Digital Signature / Verification Stamp</span>
+            <span>Include Digital Verification Stamp</span>
           </label>
           <label class="checkbox-label">
             <input type="checkbox" id="toggleWatermark" checked>
-            <span>Display Background Watermark</span>
+            <span>Display Official MK Watermark</span>
           </label>
         </div>
       </div>
@@ -161,20 +173,39 @@
           
           <!-- Background Watermark -->
           <div class="sheet-watermark" id="sheetWatermark">
-            <img src="../assets/watermark.svg" alt="MK Watermark">
+            <img src="../assets/mk-icon.png" alt="MK Watermark">
           </div>
+
+          <!-- Top Gradient Accent Bar -->
+          <div class="sheet-top-accent"></div>
 
           <!-- Sheet Header -->
           <header class="sheet-header">
             <div class="header-left">
-              <img src="../assets/logo-horizontal.svg" alt="Marketing Kernal Private Limited" class="header-brand-logo">
+              <div class="brand-lockup">
+                <img src="../assets/mk-icon.png" alt="Marketing Kernal Logo" class="brand-logo-img">
+                <div class="brand-text-block">
+                  <div class="brand-main-title">
+                    <span class="brand-word-dark">Marketing</span>
+                    <span class="brand-word-gradient">Kernal</span>
+                  </div>
+                  <div class="brand-sub-tagline">AI-POWERED GROWTH &amp; VISIBILITY PARTNER</div>
+                  <div class="brand-legal-entity">Marketing Kernal Private Limited</div>
+                </div>
+              </div>
             </div>
+            
             <div class="header-right">
-              <div class="company-legal-name">Marketing Kernal Private Limited</div>
-              <div class="company-detail">CIN: U74999MH2026PTC000000</div>
-              <div class="company-detail">Web: <a href="https://marketingkernal.com" target="_blank">marketingkernal.com</a></div>
-              <div class="company-detail">Email: info@marketingkernal.com</div>
-              <div class="company-detail">Tel: +91 9172648748</div>
+              <div class="corporate-id">CIN: U74999MH2026PTC000000</div>
+              <div class="contact-line">
+                <span class="contact-label">Web:</span> <a href="https://marketingkernal.com" target="_blank">marketingkernal.com</a>
+              </div>
+              <div class="contact-line">
+                <span class="contact-label">Email:</span> info@marketingkernal.com
+              </div>
+              <div class="contact-line">
+                <span class="contact-label">Tel:</span> +91 9172648748
+              </div>
             </div>
           </header>
 
@@ -184,7 +215,7 @@
           <div class="doc-meta-strip">
             <div class="meta-left">
               <span class="doc-badge" id="viewDocType">OFFICIAL CORRESPONDENCE</span>
-              <span class="ref-label">Ref: <strong id="viewDocRef">MK/2026/DOC-108</strong></span>
+              <span class="ref-label">Ref: <strong id="viewDocRef">MK/2026/CORR-102</strong></span>
             </div>
             <div class="meta-right">
               <span>Date: <strong id="viewDate">October 30, 2026</strong></span>
@@ -202,12 +233,13 @@
 
           <!-- Subject Banner -->
           <div class="subject-banner" id="viewSubjectBanner">
-            <strong>Subject:</strong> <span id="viewSubject"></span>
+            <span class="subject-tag">SUBJECT</span>
+            <span class="subject-text" id="viewSubject"></span>
           </div>
 
           <!-- Letter Main Body -->
           <div class="sheet-body">
-            <div class="salutation" id="viewSalutation">Dear Strategic Partners,</div>
+            <div class="salutation" id="viewSalutation">Dear Enterprise Growth Team,</div>
             <div class="body-content" id="viewBody"></div>
           </div>
 
@@ -223,7 +255,7 @@
             <div class="signatory-line"></div>
             <div class="signatory-name" id="viewSignatoryName">Pratyush Shrivastava</div>
             <div class="signatory-title" id="viewSignatoryTitle">Co-Founder &amp; Director</div>
-            <div class="signatory-dept" id="viewSignatoryDept">Executive Leadership &amp; Growth</div>
+            <div class="signatory-dept" id="viewSignatoryDept">Executive Leadership &amp; Growth Strategy</div>
           </div>
 
           <!-- Sheet Footer -->
@@ -231,8 +263,8 @@
             <div class="footer-divider"></div>
             <div class="footer-content">
               <div class="footer-left">
-                <strong>Registered Office:</strong> Marketing Kernal Private Limited &bull; India | Global Footprint: US, UK, Canada<br>
-                <strong>Confidentiality Notice:</strong> Privileged &amp; confidential communication intended solely for the addressee.
+                <strong>Marketing Kernal Private Limited</strong> &bull; India &bull; Global Operations: US, UK, Canada<br>
+                <span class="confidential-text">Privileged &amp; Confidential &bull; Designed &amp; Issued under Corporate Governance Standards</span>
               </div>
               <div class="footer-right">
                 <span class="page-indicator">Page 1 of 1</span>

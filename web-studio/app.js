@@ -303,3 +303,4 @@ printBtn.addEventListener("click", () => {
 document.addEventListener("DOMContentLoaded", () => {
   loadPreset("formal");
 });
+

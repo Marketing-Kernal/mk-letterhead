@@ -38,3 +38,4 @@ typst compile --format png --ppi 300 formal-letter.typ formal-letter.png
 1. Create a free workspace at [typst.app](https://typst.app).
 2. Upload the `assets/` and `typst/` folders.
 3. Edit collaboratively with your team in the browser with cloud PDF export.
+

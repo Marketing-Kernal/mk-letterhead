@@ -125,3 +125,4 @@ typst compile --format png --ppi 300 typst/formal-letter.typ output/preview.png
 ## 📄 License & Proprietary Rights
 
 Copyright &copy; 2026 Marketing Kernal Private Limited. All rights reserved. Confidential and proprietary to Marketing Kernal Private Limited.
+

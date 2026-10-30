@@ -954,8 +954,119 @@ processImportBtn.addEventListener("click", async () => {
   }
 });
 
+// ==============================================================================
+// CORPORATE SECURITY AUTHENTICATION GATE
+// Passcode: MK@2026# (Verified via SHA-256)
+// ==============================================================================
+
+const AUTH_HASH = "7db1e1104008cb438ccb523af3c4e240043696859eddebeac84c8ac208de43df";
+const AUTH_STORAGE_KEY = "mk_studio_auth_v1";
+
+const authGate = document.getElementById("authGate");
+const authForm = document.getElementById("authForm");
+const authPasswordInput = document.getElementById("authPasswordInput");
+const togglePasswordVisibilityBtn = document.getElementById("togglePasswordVisibilityBtn");
+const authErrorMessage = document.getElementById("authErrorMessage");
+const authRememberDevice = document.getElementById("authRememberDevice");
+const studioNav = document.getElementById("studioNav");
+const studioWorkspace = document.getElementById("studioWorkspace");
+const lockStudioBtn = document.getElementById("lockStudioBtn");
+
+async function sha256(str) {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function checkAuthStatus() {
+  const token = sessionStorage.getItem(AUTH_STORAGE_KEY) || localStorage.getItem(AUTH_STORAGE_KEY);
+  if (token === AUTH_HASH) {
+    unlockStudio();
+  } else {
+    lockStudio();
+  }
+}
+
+function unlockStudio() {
+  if (authGate) authGate.style.display = "none";
+  if (studioNav) studioNav.style.display = "flex";
+  if (studioWorkspace) studioWorkspace.style.display = "flex";
+}
+
+function lockStudio() {
+  sessionStorage.removeItem(AUTH_STORAGE_KEY);
+  localStorage.removeItem(AUTH_STORAGE_KEY);
+  if (authGate) authGate.style.display = "flex";
+  if (studioNav) studioNav.style.display = "none";
+  if (studioWorkspace) studioWorkspace.style.display = "none";
+  if (authPasswordInput) {
+    authPasswordInput.value = "";
+    setTimeout(() => authPasswordInput.focus(), 150);
+  }
+  if (authErrorMessage) authErrorMessage.style.display = "none";
+}
+
+async function verifyAndLogin() {
+  const entered = authPasswordInput.value.trim();
+  if (!entered) {
+    authErrorMessage.textContent = "Please enter the corporate passcode";
+    authErrorMessage.style.display = "block";
+    return;
+  }
+
+  const hash = await sha256(entered);
+  if (hash === AUTH_HASH || entered === "MK@2026#") {
+    authErrorMessage.style.display = "none";
+    sessionStorage.setItem(AUTH_STORAGE_KEY, AUTH_HASH);
+    if (authRememberDevice.checked) {
+      localStorage.setItem(AUTH_STORAGE_KEY, AUTH_HASH);
+    }
+    unlockStudio();
+  } else {
+    authErrorMessage.textContent = "Access Denied: Invalid Security Passcode";
+    authErrorMessage.style.display = "block";
+    authPasswordInput.select();
+  }
+}
+
+if (authForm) {
+  authForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    verifyAndLogin();
+  });
+}
+
+if (authPasswordInput) {
+  authPasswordInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      verifyAndLogin();
+    }
+  });
+}
+
+if (togglePasswordVisibilityBtn && authPasswordInput) {
+  togglePasswordVisibilityBtn.addEventListener("click", () => {
+    if (authPasswordInput.type === "password") {
+      authPasswordInput.type = "text";
+      togglePasswordVisibilityBtn.textContent = "🙈";
+    } else {
+      authPasswordInput.type = "password";
+      togglePasswordVisibilityBtn.textContent = "👁️";
+    }
+  });
+}
+
+if (lockStudioBtn) {
+  lockStudioBtn.addEventListener("click", () => {
+    if (confirm("Lock corporate letterhead studio?")) {
+      lockStudio();
+    }
+  });
+}
+
 // Initialize on page load
 document.addEventListener("DOMContentLoaded", () => {
+  checkAuthStatus();
   templatePreset.value = "xtratrust_dsc";
   loadPreset("xtratrust_dsc");
 });

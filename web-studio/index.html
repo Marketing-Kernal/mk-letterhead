@@ -15,8 +15,56 @@
 </head>
 <body>
 
-  <!-- Studio Top Navigation Bar (Hidden when printing) -->
-  <header class="studio-nav no-print">
+  <!-- Secure Admin Access Gate (Visible when locked) -->
+  <div id="authGate" class="auth-gate-overlay">
+    <div class="auth-card">
+      <div class="auth-brand-emblem">
+        <img src="assets/mk-icon.png" alt="Marketing Kernal Emblem" class="auth-logo">
+      </div>
+      <div class="auth-badge">INTERNAL GOVERNANCE &amp; STATIONERY</div>
+      <h2 class="auth-title">Marketing <span class="nav-title-accent">Kernal</span></h2>
+      <p class="auth-subtitle">Private Limited &bull; CIN: U62011ME2026PTC477307</p>
+      
+      <p class="auth-notice">
+        This portal contains official corporate stationery, board resolutions, and authorized legal signatures. Please enter your corporate passcode to proceed.
+      </p>
+
+      <form id="authForm" class="auth-form" onsubmit="return false;">
+        <div class="auth-input-group">
+          <input type="password" id="authPasswordInput" class="auth-input" placeholder="Enter Corporate Passcode" autofocus autocomplete="current-password">
+          <button type="button" id="togglePasswordVisibilityBtn" class="auth-eye-btn" title="Toggle visibility">
+            👁️
+          </button>
+        </div>
+
+        <div id="authErrorMessage" class="auth-error" style="display: none;">
+          Access Denied: Invalid Security Passcode
+        </div>
+
+        <div class="auth-remember-row">
+          <label class="checkbox-label">
+            <input type="checkbox" id="authRememberDevice" checked>
+            <span>Remember this device</span>
+          </label>
+        </div>
+
+        <button type="submit" id="authSubmitBtn" class="btn btn-primary auth-submit-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <span>Unlock Corporate Studio</span>
+        </button>
+      </form>
+
+      <div class="auth-footer-tag">
+        Secured with SHA-256 Authentication &bull; Marketing Kernal Private Limited
+      </div>
+    </div>
+  </div>
+
+  <!-- Studio Top Navigation Bar (Hidden when printing or locked) -->
+  <header class="studio-nav no-print" id="studioNav" style="display: none;">
     <div class="nav-brand">
       <img src="assets/mk-icon.png" alt="Marketing Kernal Emblem" class="nav-logo">
       <div class="nav-title-group">
@@ -88,11 +136,20 @@
         </svg>
         <span>Print to PDF (A4)</span>
       </button>
+
+      <!-- Lock Studio Button -->
+      <button id="lockStudioBtn" class="btn btn-secondary" title="Lock the studio and require passcode">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+        <span>Lock</span>
+      </button>
     </div>
   </header>
 
-  <!-- Main Split Studio Workspace -->
-  <main class="studio-workspace">
+  <!-- Main Split Studio Workspace (Hidden when locked) -->
+  <main class="studio-workspace" id="studioWorkspace" style="display: none;">
     
     <!-- Left Panel: Interactive Form Editor (Hidden when printing) -->
     <aside class="editor-panel no-print">

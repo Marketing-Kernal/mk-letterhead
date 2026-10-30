@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const PORT = process.env.PORT || 3000;
-const ROOT = __dirname;
+const ROOT = path.resolve(__dirname, '..');
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -42,7 +42,6 @@ const server = http.createServer((req, res) => {
 server.listen(PORT, () => {
   console.log(`\n==================================================`);
   console.log(`  Marketing Kernal - Corporate Letterhead Studio  `);
-  console.log(`  Live URL: http://localhost:${PORT}/web-studio/index.html  `);
+  console.log(`  Live URL: http://localhost:${PORT}/index.html   `);
   console.log(`==================================================\n`);
 });
-

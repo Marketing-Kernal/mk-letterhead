@@ -7,8 +7,8 @@
   "scripts": {
     "sync": "node -e \"const fs = require('fs'); ['index.html', 'styles.css', 'app.js'].forEach(f => fs.copyFileSync('web-studio/' + f, f)); console.log('Synced web-studio to root');\"",
     "build": "npm run sync",
-    "start": "node server.js",
-    "studio": "node server.js",
+    "start": "node scripts/dev-server.js",
+    "studio": "node scripts/dev-server.js",
     "compile:formal": "typst compile typst/formal-letter.typ output/formal-letter.pdf",
     "compile:proposal": "typst compile typst/client-proposal.typ output/client-proposal.pdf",
     "compile:offer": "typst compile typst/hr-offer-letter.typ output/hr-offer-letter.pdf",

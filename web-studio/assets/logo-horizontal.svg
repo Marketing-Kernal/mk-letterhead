@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 100" width="100%" height="100%">
+  <defs>
+    <linearGradient id="mkPrimaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284C7" />
+      <stop offset="50%" stop-color="#2563EB" />
+      <stop offset="100%" stop-color="#4F46E5" />
+    </linearGradient>
+    <linearGradient id="mkAccentGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06B6D4" />
+      <stop offset="100%" stop-color="#3B82F6" />
+    </linearGradient>
+    <filter id="subtleGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#2563EB" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Kernel Emblem Icon -->
+  <g transform="translate(10, 10)" filter="url(#subtleGlow)">
+    <!-- Outer Orbital Nodes -->
+    <circle cx="40" cy="40" r="36" fill="none" stroke="#E2E8F0" stroke-width="2" stroke-dasharray="4 3" opacity="0.8"/>
+    
+    <!-- Central Hexagonal AI Core / Kernel -->
+    <path d="M 40 14 L 63 27 L 63 53 L 40 66 L 17 53 L 17 27 Z" 
+          fill="url(#mkPrimaryGrad)" />
+    
+    <!-- Inner Converging Energy Facets -->
+    <path d="M 40 14 L 40 40 L 63 53" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.6"/>
+    <path d="M 17 27 L 40 40 L 17 53" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.4"/>
+    <path d="M 63 27 L 40 40 L 40 66" fill="none" stroke="#38BDF8" stroke-width="2" opacity="0.7"/>
+
+    <!-- Orbital Data Nodes (Generative Engine Nodes) -->
+    <circle cx="40" cy="4" r="4.5" fill="url(#mkAccentGrad)"/>
+    <circle cx="72" cy="58" r="4" fill="#2563EB"/>
+    <circle cx="8" cy="40" r="4" fill="#0284C7"/>
+    <circle cx="40" cy="76" r="4.5" fill="#4F46E5"/>
+
+    <!-- Core Center Pulse -->
+    <circle cx="40" cy="40" r="5" fill="#FFFFFF"/>
+  </g>
+
+  <!-- Typography: Marketing Kernal Private Limited -->
+  <g transform="translate(110, 22)">
+    <!-- Brand Title -->
+    <text x="0" y="32" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="28" font-weight="800" fill="#0F172A" letter-spacing="-0.5">
+      MARKETING <tspan fill="url(#mkPrimaryGrad)">KERNAL</tspan>
+    </text>
+
+    <!-- Subtitle / Entity Name -->
+    <text x="1" y="52" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="600" fill="#64748B" letter-spacing="3.2">
+      PRIVATE LIMITED &bull; AI DISCOVERY &amp; GEO LABS
+    </text>
+  </g>
+</svg>
+

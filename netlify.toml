@@ -1,0 +1,12 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/"
+  to = "/web-studio/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/studio"
+  to = "/web-studio/index.html"
+  status = 200

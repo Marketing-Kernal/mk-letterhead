@@ -1,6 +1,10 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "outputDirectory": ".",
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/studio", "destination": "/index.html" }
+    { "source": "/studio", "destination": "/index.html" },
+    { "source": "/web-studio", "destination": "/web-studio/index.html" }
   ]
 }

@@ -1,0 +1,26 @@
+{
+  "name": "marketing-kernal-letterhead",
+  "version": "1.0.0",
+  "description": "Official Corporate Letterhead & Document Generation Suite for Marketing Kernal Private Limited",
+  "author": "Marketing Kernal Private Limited <info@marketingkernal.com>",
+  "homepage": "https://marketingkernal.com",
+  "scripts": {
+    "start": "node server.js",
+    "studio": "node server.js",
+    "compile:formal": "typst compile typst/formal-letter.typ output/formal-letter.pdf",
+    "compile:proposal": "typst compile typst/client-proposal.typ output/client-proposal.pdf",
+    "compile:offer": "typst compile typst/hr-offer-letter.typ output/hr-offer-letter.pdf",
+    "compile:all": "npm run compile:formal && npm run compile:proposal && npm run compile:offer"
+  },
+  "keywords": [
+    "marketing-kernal",
+    "letterhead",
+    "stationery",
+    "typst",
+    "print-css",
+    "geo",
+    "ai-visibility"
+  ],
+  "license": "UNLICENSED",
+  "private": true
+}

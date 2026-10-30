@@ -648,15 +648,45 @@ function parseDocumentHeuristically(raw) {
   };
 }
 
-// AI Formatter via Gemini API
+// Dynamic discovery of supported Gemini models for the user's specific API key
+async function getAvailableGeminiModel(apiKey) {
+  try {
+    const listRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+    if (listRes.ok) {
+      const data = await listRes.json();
+      const models = data.models || [];
+      const generateModels = models
+        .filter(m => Array.isArray(m.supportedGenerationMethods) && m.supportedGenerationMethods.includes("generateContent"))
+        .map(m => m.name.replace(/^models\//, ''));
+      
+      if (generateModels.length > 0) {
+        // Pick best available flash model, then pro, then first supported
+        const best = generateModels.find(m => m.includes("2.5-flash"))
+                  || generateModels.find(m => m.includes("2.0-flash"))
+                  || generateModels.find(m => m.includes("1.5-flash-latest"))
+                  || generateModels.find(m => m.includes("1.5-flash"))
+                  || generateModels.find(m => m.includes("flash"))
+                  || generateModels.find(m => m.includes("pro"))
+                  || generateModels[0];
+        console.log("Auto-detected supported Gemini model:", best);
+        return best;
+      }
+    }
+  } catch (e) {
+    console.warn("Could not query ListModels, attempting fallback cascade", e);
+  }
+  return null;
+}
+
+// AI Formatter via Gemini API with auto model discovery & fallback cascade
 async function formatWithGemini(rawText, apiKey) {
-  showStatus("Processing with Gemini AI...", "info");
+  showStatus("Connecting to Gemini AI...", "info");
   const prompt = `You are an executive correspondence assistant for "Marketing Kernal Private Limited".
 Convert the following unstructured draft or document into a polished, formal corporate letter.
 Return strictly a valid JSON object without markdown formatting, following this exact schema:
 {
-  "docType": "OFFICIAL CORRESPONDENCE" or appropriate uppercase document category,
-  "docRef": "MK/2026/...",
+  "docType": "OFFICIAL CORRESPONDENCE",
+  "docRef": "MK/2026/DOC-108",
   "date": "Month Day, Year",
   "recipientName": "Name if found",
   "recipientTitle": "Title if found",
@@ -670,23 +700,50 @@ Return strictly a valid JSON object without markdown formatting, following this 
 Draft Document:
 ${rawText}`;
 
-  const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      contents: [{ parts: [{ text: prompt }] }]
-    })
-  });
+  // Discover model or cascade through common Gemini models
+  const detected = await getAvailableGeminiModel(apiKey);
+  const candidates = [
+    detected,
+    "gemini-2.5-flash",
+    "gemini-2.0-flash",
+    "gemini-1.5-flash-latest",
+    "gemini-1.5-flash",
+    "gemini-1.5-pro",
+    "gemini-pro"
+  ].filter(Boolean);
 
-  if (!res.ok) {
-    const errData = await res.json();
-    throw new Error(errData.error?.message || "Failed to communicate with Gemini API");
+  const uniqueCandidates = [...new Set(candidates)];
+  let lastError = null;
+
+  for (const model of uniqueCandidates) {
+    try {
+      showStatus(`Formatting with Gemini AI (${model})...`, "info");
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }]
+        })
+      });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error?.message || `HTTP ${res.status}`);
+      }
+
+      const data = await res.json();
+      const textOutput = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!textOutput) throw new Error("Empty response from AI model");
+
+      const cleaned = textOutput.replace(/```json/gi, "").replace(/```/g, "").trim();
+      return JSON.parse(cleaned);
+    } catch (err) {
+      console.warn(`Model ${model} failed:`, err.message);
+      lastError = err;
+    }
   }
 
-  const data = await res.json();
-  const textOutput = data.candidates?.[0]?.content?.parts?.[0]?.text;
-  const cleaned = textOutput.replace(/```json/g, "").replace(/```/g, "").trim();
-  return JSON.parse(cleaned);
+  throw lastError || new Error("Unable to connect to supported Gemini models");
 }
 
 // Apply Processed Import to Studio
@@ -703,7 +760,13 @@ processImportBtn.addEventListener("click", async () => {
 
     if (toggleAiEnhance.checked && apiKey) {
       localStorage.setItem("mk_gemini_api_key", apiKey);
-      result = await formatWithGemini(raw, apiKey);
+      try {
+        result = await formatWithGemini(raw, apiKey);
+      } catch (aiErr) {
+        console.warn("Gemini formatting failed, gracefully falling back to Smart Heuristic Extractor:", aiErr);
+        result = parseDocumentHeuristically(raw);
+        showStatus(`Gemini Notice: ${aiErr.message}. Applied cleanly with Smart Heuristic Extractor!`, "info");
+      }
     } else {
       result = parseDocumentHeuristically(raw);
     }

@@ -26,7 +26,7 @@
   signatory-name: "Mr. Vaibhav Palhade",
   signatory-title: "Director",
   signatory-dept: "Marketing Kernal Private Limited",
-  include-signature: true,
+  include-signature: false,
   watermark: true,
   body
 ) = {

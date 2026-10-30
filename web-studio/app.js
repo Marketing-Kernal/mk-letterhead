@@ -38,7 +38,7 @@ const PRESETS = {
     salutation: "Dear Sir/Madam,",
     body: `<p>Please enter your document text here. You can write paragraphs, bullet lists, or paste text directly.</p>`,
     signatory: "vaibhav",
-    showSignature: true,
+    showSignature: false,
     showWatermark: true
   },
 
@@ -54,7 +54,7 @@ const PRESETS = {
     salutation: "To All Team Members,",
     body: `<p>Please enter the memorandum contents here.</p>`,
     signatory: "vaibhav",
-    showSignature: true,
+    showSignature: false,
     showWatermark: true
   },
 
@@ -81,7 +81,7 @@ const PRESETS = {
 <p><strong>Commercial Terms & Investment:</strong> Total engagement fee is $14,500 USD (Net of statutory taxes), billed 40% upon mobilization, 30% at Milestone 2, and 30% upon final delivery. This commercial proposal remains firm and valid for 30 calendar days from the date of issuance.</p>
 <p>To accept this proposal and authorize project mobilization, please countersign and return a scanned copy to info@marketingkernal.com.</p>`,
     signatory: "vaibhav",
-    showSignature: true,
+    showSignature: false,
     showWatermark: true
   },
 
@@ -104,7 +104,7 @@ const PRESETS = {
 </ul>
 <p>Monthly fee: $5,000 USD billed on the 1st of each calendar month on Net-15 terms.</p>`,
     signatory: "vaibhav",
-    showSignature: true,
+    showSignature: false,
     showWatermark: true
   },
 
@@ -127,7 +127,7 @@ const PRESETS = {
 </ul>
 <p><strong>Total Investment:</strong> $13,500 USD (Applicable taxes as per Indian corporate export provisions).</p>`,
     signatory: "vaibhav",
-    showSignature: true,
+    showSignature: false,
     showWatermark: true
   },
 
@@ -155,7 +155,7 @@ const PRESETS = {
 <p>This communication and any accompanying technical annexures are subject to strict non-disclosure obligations. Both parties agree that proprietary architectures, benchmark data, and algorithmic strategies shared during this evaluation shall remain confidential.</p>
 <p>We look forward to initiating our collaborative technical sprint and helping your organization establish undisputed authority in the era of generative discovery.</p>`,
     signatory: "vaibhav",
-    showSignature: true,
+    showSignature: false,
     showWatermark: true
   },
 
@@ -178,7 +178,7 @@ const PRESETS = {
 </ul>
 <p>This document reflects mutual intent and sets forth the foundational principles for binding commercial contracts to be executed within sixty (60) calendar days.</p>`,
     signatory: "vaibhav",
-    showSignature: true,
+    showSignature: false,
     showWatermark: true
   },
 
@@ -195,7 +195,7 @@ const PRESETS = {
     body: `<p>This is to certify that <strong>Marketing Kernal Private Limited</strong> (CIN: U62011ME2026PTC477307), having its registered office at Awasti Layout, Big Umari, Jatherpeth, Akola, Maharashtra, India - 444005, hereby authorizes the bearer of this letter to represent the company in corporate and contractual affairs as designated.</p>
 <p>This authorization is issued pursuant to board resolutions and remains valid until expressly revoked in writing.</p>`,
     signatory: "vaibhav",
-    showSignature: true,
+    showSignature: false,
     showWatermark: true
   },
 
@@ -223,7 +223,7 @@ const PRESETS = {
 </ul>
 <p>Please confirm your formal acceptance by signing and dating this document below and returning a scanned copy within five (5) business days. We look forward to welcoming you to the Marketing Kernal team!</p>`,
     signatory: "vaibhav",
-    showSignature: true,
+    showSignature: false,
     showWatermark: true
   },
 
@@ -246,7 +246,7 @@ const PRESETS = {
 </ul>
 <p>Upon successful completion of the internship, you will be eligible for a full-time consideration and certificate of excellence.</p>`,
     signatory: "vaibhav",
-    showSignature: true,
+    showSignature: false,
     showWatermark: true
   },
 
@@ -264,7 +264,7 @@ const PRESETS = {
 <p>During her tenure with us, she exhibited high professionalism, analytical capability, and dedication. She has been formally relieved of her duties at the close of business hours on October 15, 2026.</p>
 <p>We wish her every success in her future career endeavors.</p>`,
     signatory: "vaibhav",
-    showSignature: true,
+    showSignature: false,
     showWatermark: true
   }
 };

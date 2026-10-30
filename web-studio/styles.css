@@ -705,10 +705,12 @@ textarea {
 .signature-image-container {
   height: 48px;
   margin-bottom: 4px;
+  display: flex;
+  align-items: center;
 }
 
 .signature-image-container.hidden {
-  display: none;
+  visibility: hidden;
 }
 
 .signature-img {

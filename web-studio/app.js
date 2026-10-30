@@ -24,6 +24,70 @@ const SIGNATORIES = {
 
 const PRESETS = {
   // ==========================================
+  // REGULATORY, DSC & STATUTORY DECLARATIONS
+  // ==========================================
+  xtratrust_dsc: {
+    docType: "DECLARATION",
+    docRef: "MK/2026/DECL-DSC-001",
+    date: "30-10-2026",
+    recipientName: "XtraTrust DigiSign Private Limited.",
+    recipientTitle: "",
+    recipientCompany: "",
+    recipientAddress: "",
+    subject: "Declaration for Non-Submission of Bank Statement",
+    salutation: "Dear Sir/Madam,",
+    body: `<p>We hereby declare that we have incorporated our Company by the name of <strong>Marketing Kernal Private Limited</strong> on <strong>22-10-2026</strong>. The said document is being submitted to you. We are in the process of opening our current bank account.</p>
+<p>In lieu of a bank statement or letter as required, we are providing this declaration as confirmation of our company incorporation and intent to open the Bank Account as stated above. Please consider this declaration Letter as a substitute to bank account statement/Bank Letter for XtraTrust DSC Issuance.</p>
+<p>Thank You.</p>
+<div style="margin-top: 18px; display: flex; justify-content: space-between;">
+  <div>
+    <strong>Place:</strong> Akola<br>
+    <strong>Date:</strong> 30-10-2026
+  </div>
+  <div style="text-align: right; font-weight: 700; color: #64748B;">
+    Seal &amp; Sign
+  </div>
+</div>`,
+    signatory: "vaibhav",
+    showSignature: false,
+    showWatermark: true
+  },
+
+  bank_resolution: {
+    docType: "BOARD RESOLUTION",
+    docRef: "MK/2026/RES-BNK-001",
+    date: "30-10-2026",
+    recipientName: "The Branch Manager",
+    recipientTitle: "Corporate Commercial Banking",
+    recipientCompany: "Commercial Banking Partner",
+    recipientAddress: "Akola, Maharashtra",
+    subject: "Board Resolution for Opening Corporate Current Bank Account",
+    salutation: "Dear Sir/Madam,",
+    body: `<p><strong>CERTIFIED TRUE COPY OF THE RESOLUTION PASSED AT THE MEETING OF THE BOARD OF DIRECTORS OF MARKETING KERNAL PRIVATE LIMITED (CIN: U62011ME2026PTC477307) HELD ON 24-10-2026 AT THE REGISTERED OFFICE.</strong></p>
+<p><strong>RESOLVED THAT</strong> a Corporate Current Account in the name and style of <em>Marketing Kernal Private Limited</em> be opened with your Bank, and the Bank be and is hereby authorized to honor all cheques, drafts, bills of exchange, and promissory notes drawn, accepted, or signed on behalf of the Company.</p>
+<p><strong>FURTHER RESOLVED THAT</strong> <strong>Mr. Vaibhav Palhade</strong>, Director, be and is hereby singly authorized to sign and execute all account opening forms, declarations, KYC documentation, internet banking mandates, and operate the said account on behalf of the Company.</p>`,
+    signatory: "vaibhav",
+    showSignature: false,
+    showWatermark: true
+  },
+
+  statutory_undertaking: {
+    docType: "STATUTORY UNDERTAKING",
+    docRef: "MK/2026/UND-002",
+    date: "30-10-2026",
+    recipientName: "Registrar of Companies / Regulatory Authorities",
+    recipientTitle: "Ministry of Corporate Affairs",
+    recipientCompany: "Government of India",
+    recipientAddress: "Maharashtra, India",
+    subject: "Statutory Undertaking & Compliance Declaration",
+    salutation: "Respected Authorities,",
+    body: `<p>We, <strong>Marketing Kernal Private Limited</strong> (CIN: <strong>U62011ME2026PTC477307</strong>), incorporated on <strong>22-10-2026</strong> having our registered office at Awasti Layout, Big Umari, Jatherpeth, Akola, Maharashtra, India, - 444005, do hereby solemnly affirm and state that all statutory compliances and regulatory filings are in adherence with the Companies Act, 2013 and relevant governance standards.</p>`,
+    signatory: "vaibhav",
+    showSignature: false,
+    showWatermark: true
+  },
+
+  // ==========================================
   // BLANK TEMPLATES (CLEAN CANVAS)
   // ==========================================
   blank_letter: {
@@ -799,5 +863,6 @@ processImportBtn.addEventListener("click", async () => {
 
 // Initialize on page load
 document.addEventListener("DOMContentLoaded", () => {
-  loadPreset("formal");
+  templatePreset.value = "xtratrust_dsc";
+  loadPreset("xtratrust_dsc");
 });

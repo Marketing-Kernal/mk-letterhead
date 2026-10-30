@@ -1,0 +1,30 @@
+{
+  "docType": "DECLARATION",
+  "docRef": "MK/2026/DECL-DSC-001",
+  "date": "30-10-2026",
+  "recipient": {
+    "name": "XtraTrust DigiSign Private Limited",
+    "title": "Digital Signature Department",
+    "company": "",
+    "address": ""
+  },
+  "subject": "Declaration for Non-Submission of Bank Statement",
+  "salutation": "Dear Sir/Madam,",
+  "body": "We hereby declare that we have incorporated our Company by the name of Marketing Kernal Private Limited on 22-10-2026. The said document is being submitted to you. We are in the process of opening our current bank account.\n\nIn lieu of a bank statement or letter as required, we are providing this declaration as confirmation of our company incorporation and intent to open the Bank Account as stated above. Please consider this declaration Letter as a substitute to bank account statement/Bank Letter for XtraTrust DSC Issuance.\n\nThank You.",
+  "signatory": {
+    "name": "Mr. Vaibhav Palhade",
+    "title": "Director",
+    "department": "Marketing Kernal Private Limited"
+  },
+  "place": "Akola",
+  "incorporationDate": "22-10-2026",
+  "metadata": {
+    "companyName": "Marketing Kernal Private Limited",
+    "cin": "U62011ME2026PTC477307",
+    "incorporationDate": "22-10-2026",
+    "registeredAddress": "Awasti Layout, Big Umari, Jatherpeth, Akola, Maharashtra, India, - 444005",
+    "website": "https://marketingkernal.com",
+    "email": "info@marketingkernal.com",
+    "phone": "+91 9172648748"
+  }
+}

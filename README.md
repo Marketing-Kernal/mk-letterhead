@@ -6,7 +6,7 @@ Official corporate stationery and automated document generation suite for **Mark
 * **Registered Office:** Awasti Layout, Big Umari, Jatherpeth, Akola, Maharashtra, India, - 444005
 * **Official Signatory:** Mr. Vaibhav Palhade, Director, Marketing Kernal Private Limited
 * **Official Website:** [marketingkernal.com](https://marketingkernal.com) | **Email:** [info@marketingkernal.com](mailto:info@marketingkernal.com) | **Tel:** +91 9172648748
-* **Live Web Studio:** [https://marketing-kernal.github.io/mk-letterhead/](https://marketing-kernal.github.io/mk-letterhead/)
+* **Live Web Studio:** [https://mk-letterhead.vercel.app/](https://mk-letterhead.vercel.app/)
 
 ---
 
@@ -49,7 +49,7 @@ MK Letterhead/
 
 ## 🚀 Engine 1: Interactive Web Studio & Smart AI Formatter
 
-The **Letterhead Web Studio** is hosted live at **[https://marketing-kernal.github.io/mk-letterhead/](https://marketing-kernal.github.io/mk-letterhead/)** and requires zero installation.
+The **Letterhead Web Studio** is hosted live at **[https://mk-letterhead.vercel.app/](https://mk-letterhead.vercel.app/)** and requires zero installation.
 
 ### Key Features:
 1. **Clean Divided Categories**:

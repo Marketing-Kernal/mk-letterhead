@@ -5,6 +5,8 @@
   "author": "Marketing Kernal Private Limited <info@marketingkernal.com>",
   "homepage": "https://marketingkernal.com",
   "scripts": {
+    "sync": "node -e \"const fs = require('fs'); ['index.html', 'styles.css', 'app.js'].forEach(f => fs.copyFileSync('web-studio/' + f, f)); console.log('Synced web-studio to root');\"",
+    "build": "npm run sync",
     "start": "node server.js",
     "studio": "node server.js",
     "compile:formal": "typst compile typst/formal-letter.typ output/formal-letter.pdf",

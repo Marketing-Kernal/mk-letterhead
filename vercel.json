@@ -1,8 +1,10 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/", "destination": "/web-studio/index.html" },
-    { "source": "/studio", "destination": "/web-studio/index.html" }
+    { "source": "/styles.css", "destination": "/styles.css" },
+    { "source": "/app.js", "destination": "/app.js" },
+    { "source": "/assets/:path*", "destination": "/assets/:path*" },
+    { "source": "/studio", "destination": "/index.html" },
+    { "source": "/web-studio", "destination": "/web-studio/index.html" }
   ]
 }
-

@@ -19,7 +19,7 @@ const MIME_TYPES = {
 const server = http.createServer((req, res) => {
   let reqPath = req.url.split('?')[0];
   if (reqPath === '/' || reqPath === '/studio') {
-    reqPath = '/web-studio/index.html';
+    reqPath = '/index.html';
   }
 
   const filePath = path.join(ROOT, reqPath);

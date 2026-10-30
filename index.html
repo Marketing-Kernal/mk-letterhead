@@ -2,31 +2,457 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=web-studio/index.html">
-  <title>Marketing Kernal - Letterhead Studio</title>
-  <script>
-    window.location.replace("web-studio/index.html");
-  </script>
-  <style>
-    body {
-      background-color: #090714;
-      color: #FFFFFF;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
-    a {
-      color: #9E2CFE;
-      text-decoration: none;
-      font-weight: 600;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketing Kernal - Corporate Letterhead Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Client-Side Document Parsers for Docx & PDF Import -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.8.0/mammoth.browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 <body>
-  <p>Loading Marketing Kernal Letterhead Studio... <a href="web-studio/index.html">Click here if not redirected</a>.</p>
+
+  <!-- Secure Admin Access Gate (Visible when locked) -->
+  <div id="authGate" class="auth-gate-overlay">
+    <div class="auth-card">
+      <div class="auth-brand-emblem">
+        <img src="assets/mk-icon.png" alt="Marketing Kernal Emblem" class="auth-logo">
+      </div>
+      <div class="auth-badge">INTERNAL GOVERNANCE &amp; STATIONERY</div>
+      <h2 class="auth-title">Marketing <span class="nav-title-accent">Kernal</span></h2>
+      <p class="auth-subtitle">Private Limited &bull; CIN: U62011ME2026PTC477307</p>
+      
+      <p class="auth-notice">
+        This portal contains official corporate stationery, board resolutions, and authorized legal signatures. Please enter your corporate passcode to proceed.
+      </p>
+
+      <form id="authForm" class="auth-form" onsubmit="return false;">
+        <div class="auth-input-group">
+          <input type="password" id="authPasswordInput" class="auth-input" placeholder="Enter Corporate Passcode" autofocus autocomplete="current-password">
+          <button type="button" id="togglePasswordVisibilityBtn" class="auth-eye-btn" title="Toggle visibility">
+            👁️
+          </button>
+        </div>
+
+        <div id="authErrorMessage" class="auth-error" style="display: none;">
+          Access Denied: Invalid Security Passcode
+        </div>
+
+        <div class="auth-remember-row">
+          <label class="checkbox-label">
+            <input type="checkbox" id="authRememberDevice" checked>
+            <span>Remember this device</span>
+          </label>
+        </div>
+
+        <button type="submit" id="authSubmitBtn" class="btn btn-primary auth-submit-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <span>Unlock Corporate Studio</span>
+        </button>
+      </form>
+
+      <div class="auth-footer-tag">
+        Secured with SHA-256 Authentication &bull; Marketing Kernal Private Limited
+      </div>
+    </div>
+  </div>
+
+  <!-- Studio Top Navigation Bar (Hidden when printing or locked) -->
+  <header class="studio-nav no-print" id="studioNav" style="display: none;">
+    <div class="nav-brand">
+      <img src="assets/mk-icon.png" alt="Marketing Kernal Emblem" class="nav-logo">
+      <div class="nav-title-group">
+        <span class="nav-title">MARKETING <span class="nav-title-accent">KERNAL</span></span>
+        <span class="nav-badge">Letterhead Studio</span>
+      </div>
+    </div>
+
+    <div class="nav-actions">
+      <!-- Clean Divided Category Preset Selector -->
+      <div class="preset-dropdown">
+        <label for="templatePreset">Template:</label>
+        <select id="templatePreset" class="select-input">
+          <optgroup label="📜 Regulatory, DSC &amp; Declarations">
+            <option value="xtratrust_dsc">XtraTrust DSC - Non-Submission of Bank Statement</option>
+            <option value="bank_resolution">Board Resolution for Bank Account Opening</option>
+            <option value="statutory_undertaking">Statutory Declaration &amp; Undertaking</option>
+          </optgroup>
+          <optgroup label="✨ Blank Templates (Start Fresh)">
+            <option value="blank_letter">Blank Formal Letterhead</option>
+            <option value="blank_memo">Blank Internal Memorandum</option>
+          </optgroup>
+          <optgroup label="📋 Commercial &amp; Client SOW">
+            <option value="proposal">Commercial Proposal &amp; SOW</option>
+            <option value="retainer">Client Retainer &amp; Services</option>
+            <option value="quotation">Price Quotation &amp; Estimate</option>
+          </optgroup>
+          <optgroup label="🏛️ Corporate &amp; Governance">
+            <option value="formal">Official Correspondence</option>
+            <option value="mou">Partnership MoU</option>
+            <option value="authority">Letter of Authority / Board Resolution</option>
+          </optgroup>
+          <optgroup label="👥 People &amp; Human Resources">
+            <option value="offer">Employment Offer Letter</option>
+            <option value="internship">Internship Appointment</option>
+            <option value="experience">Experience &amp; Relieving Certificate</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <!-- Smart Document Import / AI Formatter Trigger -->
+      <button id="openImportModalBtn" class="btn btn-ai" title="Upload a PDF, DOCX, or text file to convert into a letterhead">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="17 8 12 3 7 8"></polyline>
+          <line x1="12" y1="3" x2="12" y2="15"></line>
+        </svg>
+        <span>Import Doc / AI Formatter</span>
+      </button>
+
+      <!-- Save Document Data as JSON -->
+      <button id="saveJsonBtn" class="btn btn-secondary" title="Download this document data as a reusable JSON file">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <span>Save JSON</span>
+      </button>
+
+      <button id="resetBtn" class="btn btn-secondary" title="Clear all fields to blank template">
+        Reset
+      </button>
+
+      <button id="printBtn" class="btn btn-primary" title="Export as PDF using browser print engine">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/>
+          <path d="M6 14h12v8H6z"/>
+        </svg>
+        <span>Print to PDF (A4)</span>
+      </button>
+
+      <!-- Lock Studio Button -->
+      <button id="lockStudioBtn" class="btn btn-secondary" title="Lock the studio and require passcode">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+        <span>Lock</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Split Studio Workspace (Hidden when locked) -->
+  <main class="studio-workspace" id="studioWorkspace" style="display: none;">
+    
+    <!-- Left Panel: Interactive Form Editor (Hidden when printing) -->
+    <aside class="editor-panel no-print">
+      
+      <!-- Corporate Identity Notice -->
+      <div class="brand-pill-banner">
+        <div class="palette-dots">
+          <span class="dot dot-deep" title="#5A09D1 Royal Purple"></span>
+          <span class="dot dot-mid" title="#7C1BF0 Imperial Violet"></span>
+          <span class="dot dot-glow" title="#9E2CFE Ultraviolet"></span>
+          <span class="dot dot-dark" title="#090714 Obsidian"></span>
+        </div>
+        <div class="banner-corp-text">
+          <strong>Marketing Kernal Private Limited</strong>
+          <span class="cin-tag">CIN: U62011ME2026PTC477307</span>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3 class="section-title">Document Metadata</h3>
+        
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="inputDocType">Document Type</label>
+            <input type="text" id="inputDocType" value="OFFICIAL CORRESPONDENCE">
+          </div>
+          <div class="form-group flex-1">
+            <label for="inputDocRef">Reference No.</label>
+            <input type="text" id="inputDocRef" value="MK/2026/CORR-102">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputDate">Date</label>
+          <input type="text" id="inputDate" value="October 30, 2026">
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3 class="section-title">Recipient Information</h3>
+        <div class="form-group">
+          <label for="inputRecipientName">Contact Name</label>
+          <input type="text" id="inputRecipientName" placeholder="e.g. John Doe">
+        </div>
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="inputRecipientTitle">Designation</label>
+            <input type="text" id="inputRecipientTitle" placeholder="e.g. Chief Marketing Officer">
+          </div>
+          <div class="form-group flex-1">
+            <label for="inputRecipientCompany">Company / Entity</label>
+            <input type="text" id="inputRecipientCompany" placeholder="e.g. Vertex Technologies Ltd.">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputRecipientAddress">Address</label>
+          <textarea id="inputRecipientAddress" rows="2" placeholder="Street, City, State, Country"></textarea>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3 class="section-title">Letter Subject &amp; Content</h3>
+        <div class="form-group">
+          <label for="inputSubject">Subject Line</label>
+          <input type="text" id="inputSubject" value="Strategic Partnership in Generative Engine Optimization (GEO) &amp; Entity Discovery">
+        </div>
+        <div class="form-group">
+          <label for="inputSalutation">Salutation</label>
+          <input type="text" id="inputSalutation" value="Dear Enterprise Growth Team,">
+        </div>
+        <div class="form-group">
+          <label for="inputBody">Body Text (HTML / Paragraphs supported)</label>
+          <textarea id="inputBody" rows="10"></textarea>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3 class="section-title">Signatory &amp; Authentication</h3>
+        
+        <div class="form-group">
+          <label for="signatoryPreset">Signatory Preset</label>
+          <select id="signatoryPreset" class="select-input">
+            <option value="vaibhav" selected>Mr. Vaibhav Palhade (Director, Marketing Kernal Private Limited)</option>
+            <option value="pratyush">Pratyush Shrivastava (Co-Founder &amp; Director)</option>
+            <option value="tejas">Tejas Guruo (Co-Founder &amp; Director)</option>
+            <option value="custom">Custom Signatory...</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="inputSignatoryName">Signatory Name (Full Legal Name)</label>
+          <input type="text" id="inputSignatoryName" value="Mr. Vaibhav Palhade" class="enlarged-input" placeholder="e.g. Mr. Vaibhav Palhade">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="inputSignatoryTitle">Designation</label>
+            <input type="text" id="inputSignatoryTitle" value="Director">
+          </div>
+          <div class="form-group flex-1">
+            <label for="inputSignatoryDept">Organization / Department</label>
+            <input type="text" id="inputSignatoryDept" value="Marketing Kernal Private Limited">
+          </div>
+        </div>
+
+        <!-- Toggles -->
+        <div class="checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="toggleSignature">
+            <span>Include Digital Verification Stamp / Signature</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="toggleWatermark" checked>
+            <span>Display Official MK Watermark</span>
+          </label>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right Panel: Live A4 Sheet Preview -->
+    <section class="preview-panel">
+      <div class="paper-container">
+        
+        <!-- Standard A4 Sheet -->
+        <article class="a4-sheet" id="letterheadSheet">
+          
+          <!-- Background Watermark -->
+          <div class="sheet-watermark" id="sheetWatermark">
+            <img src="assets/mk-icon.png" alt="MK Watermark">
+          </div>
+
+          <!-- Top Gradient Accent Bar -->
+          <div class="sheet-top-accent"></div>
+
+          <!-- Sheet Header -->
+          <header class="sheet-header">
+            <div class="header-left">
+              <div class="brand-lockup">
+                <img src="assets/mk-icon.png" alt="Marketing Kernal Logo" class="brand-logo-img">
+                <div class="brand-text-block">
+                  <div class="brand-main-title">
+                    <span class="brand-word-dark">Marketing</span>
+                    <span class="brand-word-gradient">Kernal</span>
+                  </div>
+                  <div class="brand-sub-tagline">AI-POWERED GROWTH &amp; VISIBILITY PARTNER</div>
+                  <div class="brand-legal-entity">Marketing Kernal Private Limited</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="header-right">
+              <div class="corporate-id">CIN: U62011ME2026PTC477307</div>
+              <div class="contact-line">
+                <span class="contact-label">Web:</span> <a href="https://marketingkernal.com" target="_blank">marketingkernal.com</a>
+              </div>
+              <div class="contact-line">
+                <span class="contact-label">Email:</span> info@marketingkernal.com
+              </div>
+              <div class="contact-line">
+                <span class="contact-label">Tel:</span> +91 9172648748
+              </div>
+            </div>
+          </header>
+
+          <div class="header-divider"></div>
+
+          <!-- Document Meta Strip -->
+          <div class="doc-meta-strip">
+            <div class="meta-left">
+              <span class="doc-badge" id="viewDocType">OFFICIAL CORRESPONDENCE</span>
+              <span class="ref-label">Ref: <strong id="viewDocRef">MK/2026/CORR-102</strong></span>
+            </div>
+            <div class="meta-right">
+              <span>Date: <strong id="viewDate">October 30, 2026</strong></span>
+            </div>
+          </div>
+
+          <!-- Recipient Section -->
+          <div class="recipient-card" id="viewRecipientSection">
+            <div class="recipient-lead">TO:</div>
+            <div class="recipient-name" id="viewRecipientName"></div>
+            <div class="recipient-title" id="viewRecipientTitle"></div>
+            <div class="recipient-company" id="viewRecipientCompany"></div>
+            <div class="recipient-address" id="viewRecipientAddress"></div>
+          </div>
+
+          <!-- Subject Banner -->
+          <div class="subject-banner" id="viewSubjectBanner">
+            <span class="subject-tag">SUBJECT</span>
+            <span class="subject-text" id="viewSubject"></span>
+          </div>
+
+          <!-- Letter Main Body -->
+          <div class="sheet-body">
+            <div class="salutation" id="viewSalutation">Dear Enterprise Growth Team,</div>
+            <div class="body-content" id="viewBody"></div>
+          </div>
+
+          <!-- Signatory & Closure Block -->
+          <div class="sheet-signatory-block">
+            <div class="closure-text">Sincerely,</div>
+            <div class="for-company">For Marketing Kernal Private Limited</div>
+            
+            <div class="signature-image-container" id="viewSignatureBox">
+              <img src="assets/signature-placeholder.svg" alt="Digital Signature" class="signature-img">
+            </div>
+
+            <div class="signatory-line"></div>
+            <div class="signatory-name" id="viewSignatoryName">Mr. Vaibhav Palhade</div>
+            <div class="signatory-title" id="viewSignatoryTitle">Director</div>
+            <div class="signatory-dept" id="viewSignatoryDept">Marketing Kernal Private Limited</div>
+            <div class="seal-mark-tag">(Authorized Signatory &amp; Official Seal)</div>
+          </div>
+
+          <!-- Sheet Footer with Official Registered Address -->
+          <footer class="sheet-footer">
+            <div class="footer-divider"></div>
+            <div class="footer-content">
+              <div class="footer-left">
+                <strong>Marketing Kernal Private Limited</strong> &bull; CIN: U62011ME2026PTC477307<br>
+                <strong>Regd. Office:</strong> Awasti Layout, Big Umari, Jatherpeth, Akola, Maharashtra, India, - 444005<br>
+                <span class="confidential-text">Privileged &amp; Confidential &bull; Designed &amp; Issued under Corporate Governance Standards</span>
+              </div>
+              <div class="footer-right">
+                <span class="page-indicator">Page 1 of 1</span>
+              </div>
+            </div>
+          </footer>
+
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Smart Document Import & AI Formatter Modal (Hidden by default) -->
+  <div class="modal-overlay no-print" id="importModal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-icon-badge">✨</div>
+          <div>
+            <h3 class="modal-title">Smart Document Import &amp; AI Formatter</h3>
+            <p class="modal-subtitle">Upload a PDF, Word DOCX, or text file to format into Marketing Kernal letterhead</p>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="closeImportModalBtn">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- File Drag & Drop Zone -->
+        <div class="dropzone" id="fileDropzone">
+          <input type="file" id="fileInput" accept=".docx,.pdf,.txt,.md,.json" style="display: none;">
+          <div class="dropzone-inner">
+            <svg class="dropzone-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="12" y1="18" x2="12" y2="12"></line>
+              <polyline points="9 15 12 12 15 15"></polyline>
+            </svg>
+            <div class="dropzone-text">
+              <strong>Click to upload</strong> or drag and drop a file
+            </div>
+            <div class="dropzone-hint">Supports .docx (Word), .pdf, .txt, .md, .json</div>
+          </div>
+        </div>
+
+        <div class="or-divider"><span>OR PASTE RAW TEXT / DRAFT NOTES</span></div>
+
+        <!-- Raw Text Paste Area -->
+        <div class="form-group">
+          <textarea id="importRawText" rows="6" placeholder="Paste your raw document draft, email body, or client notes here...&#10;&#10;Our intelligent extractor will automatically detect the date, recipient, subject, and paragraphs!"></textarea>
+        </div>
+
+        <!-- Status & Parsing Message -->
+        <div id="importStatus" class="import-status" style="display: none;"></div>
+
+        <!-- AI Assistant Enhancement Options -->
+        <div class="ai-toggle-box">
+          <div class="ai-toggle-header">
+            <label class="checkbox-label">
+              <input type="checkbox" id="toggleAiEnhance">
+              <span><strong>Format &amp; Polish with Gemini AI</strong> (Converts rough notes into executive tone)</span>
+            </label>
+          </div>
+          <div id="aiKeyGroup" class="ai-key-group" style="display: none;">
+            <label for="geminiApiKey">Gemini API Key (stored strictly in your browser):</label>
+            <input type="text" id="geminiApiKey" placeholder="AIzaSy..." class="api-key-input">
+            <small class="key-hint">Optional: Leave blank to use smart built-in offline heuristic extractor.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="cancelImportBtn">Cancel</button>
+        <button class="btn btn-primary" id="processImportBtn">
+          <span>Apply to Letterhead</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
-

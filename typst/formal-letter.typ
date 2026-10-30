@@ -12,9 +12,9 @@
     San Francisco, CA 94107, USA
   ],
   subject: "Strategic Partnership in Generative Engine Optimization (GEO) & Entity Discovery",
-  signatory-name: "Pratyush Shrivastava",
-  signatory-title: "Co-Founder & Director",
-  signatory-dept: "Executive Office & Growth Strategy",
+  signatory-name: "Mr. Vaibhav Palhade",
+  signatory-title: "Director",
+  signatory-dept: "Marketing Kernal Private Limited",
   include-signature: true,
   watermark: true
 )
@@ -38,4 +38,3 @@ This communication and any accompanying technical annexures are subject to stric
 We look forward to initiating our collaborative technical sprint and helping your organization establish undisputed authority in the era of generative discovery.
 
 Please feel free to reach out directly to our executive team at #link("mailto:info@marketingkernal.com")[info@marketingkernal.com] or via telephone at *+91 9172648748*.
-

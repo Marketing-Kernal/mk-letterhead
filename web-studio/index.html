@@ -8,6 +8,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Client-Side Document Parsers for Docx & PDF Import -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.8.0/mammoth.browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 <body>
 
@@ -22,18 +26,43 @@
     </div>
 
     <div class="nav-actions">
-      <!-- Quick Template Selector -->
+      <!-- Clean Divided Category Preset Selector -->
       <div class="preset-dropdown">
-        <label for="templatePreset">Preset:</label>
+        <label for="templatePreset">Template:</label>
         <select id="templatePreset" class="select-input">
-          <option value="formal">Official Correspondence</option>
-          <option value="proposal">Client Proposal &amp; SOW</option>
-          <option value="offer">HR Employment Offer</option>
-          <option value="mou">Partnership MoU</option>
+          <optgroup label="✨ Blank Templates (Start Fresh)">
+            <option value="blank_letter">Blank Formal Letterhead</option>
+            <option value="blank_memo">Blank Internal Memorandum</option>
+          </optgroup>
+          <optgroup label="📋 Commercial &amp; Client SOW">
+            <option value="proposal">Commercial Proposal &amp; SOW</option>
+            <option value="retainer">Client Retainer &amp; Services</option>
+            <option value="quotation">Price Quotation &amp; Estimate</option>
+          </optgroup>
+          <optgroup label="🏛️ Corporate &amp; Governance">
+            <option value="formal" selected>Official Correspondence</option>
+            <option value="mou">Partnership MoU</option>
+            <option value="authority">Letter of Authority / Board Resolution</option>
+          </optgroup>
+          <optgroup label="👥 People &amp; Human Resources">
+            <option value="offer">Employment Offer Letter</option>
+            <option value="internship">Internship Appointment</option>
+            <option value="experience">Experience &amp; Relieving Certificate</option>
+          </optgroup>
         </select>
       </div>
 
-      <button id="resetBtn" class="btn btn-secondary" title="Clear all fields">
+      <!-- Smart Document Import / AI Formatter Trigger -->
+      <button id="openImportModalBtn" class="btn btn-ai" title="Upload a PDF, DOCX, or text file to convert into a letterhead">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="17 8 12 3 7 8"></polyline>
+          <line x1="12" y1="3" x2="12" y2="15"></line>
+        </svg>
+        <span>Import Doc / AI Formatter</span>
+      </button>
+
+      <button id="resetBtn" class="btn btn-secondary" title="Clear all fields to blank template">
         Reset
       </button>
 
@@ -53,7 +82,7 @@
     <!-- Left Panel: Interactive Form Editor (Hidden when printing) -->
     <aside class="editor-panel no-print">
       
-      <!-- Palette & Theme Notice -->
+      <!-- Corporate Identity Notice -->
       <div class="brand-pill-banner">
         <div class="palette-dots">
           <span class="dot dot-deep" title="#5A09D1 Royal Purple"></span>
@@ -61,7 +90,10 @@
           <span class="dot dot-glow" title="#9E2CFE Ultraviolet"></span>
           <span class="dot dot-dark" title="#090714 Obsidian"></span>
         </div>
-        <span>Official Ultraviolet &amp; Obsidian Identity</span>
+        <div class="banner-corp-text">
+          <strong>Marketing Kernal Private Limited</strong>
+          <span class="cin-tag">CIN: U62011ME2026PTC477307</span>
+        </div>
       </div>
 
       <div class="panel-section">
@@ -128,8 +160,8 @@
           <div class="form-group flex-1">
             <label for="signatoryPreset">Signatory Preset</label>
             <select id="signatoryPreset" class="select-input">
+              <option value="vaibhav" selected>Mr. Vaibhav Palhade (Director, Marketing Kernal Private Limited)</option>
               <option value="pratyush">Pratyush Shrivastava (Co-Founder &amp; Director)</option>
-              <option value="vaibhav">Vaibhav Palhade (Co-Founder &amp; Director)</option>
               <option value="tejas">Tejas Guruo (Co-Founder &amp; Director)</option>
               <option value="custom">Custom Signatory...</option>
             </select>
@@ -138,16 +170,16 @@
         <div class="form-row">
           <div class="form-group flex-1">
             <label for="inputSignatoryName">Signatory Name</label>
-            <input type="text" id="inputSignatoryName" value="Pratyush Shrivastava">
+            <input type="text" id="inputSignatoryName" value="Mr. Vaibhav Palhade">
           </div>
           <div class="form-group flex-1">
             <label for="inputSignatoryTitle">Designation</label>
-            <input type="text" id="inputSignatoryTitle" value="Co-Founder & Director">
+            <input type="text" id="inputSignatoryTitle" value="Director">
           </div>
         </div>
         <div class="form-group">
-          <label for="inputSignatoryDept">Department</label>
-          <input type="text" id="inputSignatoryDept" value="Executive Leadership &amp; Growth Strategy">
+          <label for="inputSignatoryDept">Organization / Department</label>
+          <input type="text" id="inputSignatoryDept" value="Marketing Kernal Private Limited">
         </div>
 
         <!-- Toggles -->
@@ -196,7 +228,7 @@
             </div>
             
             <div class="header-right">
-              <div class="corporate-id">CIN: U74999MH2026PTC000000</div>
+              <div class="corporate-id">CIN: U62011ME2026PTC477307</div>
               <div class="contact-line">
                 <span class="contact-label">Web:</span> <a href="https://marketingkernal.com" target="_blank">marketingkernal.com</a>
               </div>
@@ -253,17 +285,18 @@
             </div>
 
             <div class="signatory-line"></div>
-            <div class="signatory-name" id="viewSignatoryName">Pratyush Shrivastava</div>
-            <div class="signatory-title" id="viewSignatoryTitle">Co-Founder &amp; Director</div>
-            <div class="signatory-dept" id="viewSignatoryDept">Executive Leadership &amp; Growth Strategy</div>
+            <div class="signatory-name" id="viewSignatoryName">Mr. Vaibhav Palhade</div>
+            <div class="signatory-title" id="viewSignatoryTitle">Director</div>
+            <div class="signatory-dept" id="viewSignatoryDept">Marketing Kernal Private Limited</div>
           </div>
 
-          <!-- Sheet Footer -->
+          <!-- Sheet Footer with Official Registered Address -->
           <footer class="sheet-footer">
             <div class="footer-divider"></div>
             <div class="footer-content">
               <div class="footer-left">
-                <strong>Marketing Kernal Private Limited</strong> &bull; India &bull; Global Operations: US, UK, Canada<br>
+                <strong>Marketing Kernal Private Limited</strong> &bull; CIN: U62011ME2026PTC477307<br>
+                <strong>Regd. Office:</strong> Awasti Layout, Big Umari, Jatherpeth, Akola, Maharashtra, India, - 444005<br>
                 <span class="confidential-text">Privileged &amp; Confidential &bull; Designed &amp; Issued under Corporate Governance Standards</span>
               </div>
               <div class="footer-right">
@@ -278,6 +311,73 @@
     </section>
 
   </main>
+
+  <!-- Smart Document Import & AI Formatter Modal (Hidden by default) -->
+  <div class="modal-overlay no-print" id="importModal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-icon-badge">✨</div>
+          <div>
+            <h3 class="modal-title">Smart Document Import &amp; AI Formatter</h3>
+            <p class="modal-subtitle">Upload a PDF, Word DOCX, or text file to format into Marketing Kernal letterhead</p>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="closeImportModalBtn">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- File Drag & Drop Zone -->
+        <div class="dropzone" id="fileDropzone">
+          <input type="file" id="fileInput" accept=".docx,.pdf,.txt,.md,.json" style="display: none;">
+          <div class="dropzone-inner">
+            <svg class="dropzone-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="12" y1="18" x2="12" y2="12"></line>
+              <polyline points="9 15 12 12 15 15"></polyline>
+            </svg>
+            <div class="dropzone-text">
+              <strong>Click to upload</strong> or drag and drop a file
+            </div>
+            <div class="dropzone-hint">Supports .docx (Word), .pdf, .txt, .md, .json</div>
+          </div>
+        </div>
+
+        <div class="or-divider"><span>OR PASTE RAW TEXT / DRAFT NOTES</span></div>
+
+        <!-- Raw Text Paste Area -->
+        <div class="form-group">
+          <textarea id="importRawText" rows="6" placeholder="Paste your raw document draft, email body, or client notes here...&#10;&#10;Our intelligent extractor will automatically detect the date, recipient, subject, and paragraphs!"></textarea>
+        </div>
+
+        <!-- Status & Parsing Message -->
+        <div id="importStatus" class="import-status" style="display: none;"></div>
+
+        <!-- AI Assistant Enhancement Options -->
+        <div class="ai-toggle-box">
+          <div class="ai-toggle-header">
+            <label class="checkbox-label">
+              <input type="checkbox" id="toggleAiEnhance">
+              <span><strong>Format &amp; Polish with Gemini AI</strong> (Converts rough notes into executive tone)</span>
+            </label>
+          </div>
+          <div id="aiKeyGroup" class="ai-key-group" style="display: none;">
+            <label for="geminiApiKey">Gemini API Key (stored strictly in your browser):</label>
+            <input type="text" id="geminiApiKey" placeholder="AIzaSy..." class="api-key-input">
+            <small class="key-hint">Optional: Leave blank to use smart built-in offline heuristic extractor.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="cancelImportBtn">Cancel</button>
+        <button class="btn btn-primary" id="processImportBtn">
+          <span>Apply to Letterhead</span>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>

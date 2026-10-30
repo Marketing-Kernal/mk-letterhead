@@ -1,6 +1,7 @@
 // ==============================================================================
 // MARKETING KERNAL PRIVATE LIMITED - TYPST LETTERHEAD ENGINE
-// Official Brand Identity: Royal Purple (#5A09D1) to Ultraviolet (#9E2CFE) & Obsidian
+// Official Corporate Stationery & Document Generation Suite
+// CIN: U62011ME2026PTC477307 | Address: Akola, Maharashtra, India - 444005
 // Website: https://marketingkernal.com | Contact: info@marketingkernal.com
 // ==============================================================================
 
@@ -22,9 +23,9 @@
   recipient-company: none,
   recipient-address: none,
   subject: none,
-  signatory-name: "Pratyush Shrivastava",
-  signatory-title: "Co-Founder & Director",
-  signatory-dept: "Executive Leadership & Growth Strategy",
+  signatory-name: "Mr. Vaibhav Palhade",
+  signatory-title: "Director",
+  signatory-dept: "Marketing Kernal Private Limited",
   include-signature: true,
   watermark: true,
   body
@@ -32,7 +33,7 @@
   // Page Configuration (Standard A4 Corporate Stationery)
   set page(
     paper: "a4",
-    margin: (top: 4.0cm, bottom: 3.2cm, left: 2.4cm, right: 2.4cm),
+    margin: (top: 4.2cm, bottom: 3.2cm, left: 2.4cm, right: 2.4cm),
     header-ascent: 20%,
     footer-descent: 25%,
     
@@ -58,23 +59,24 @@
               gutter: 10pt,
               align: (left + horizon, left + horizon),
               [
-                #image("../assets/mk-icon.png", width: 1.3cm)
+                #image("../assets/mk-icon.png", width: 1.35cm)
               ],
               [
                 #set text(font: ("Plus Jakarta Sans", "Inter", "Arial"))
-                #text(size: 15pt, weight: "bold", fill: brand-obsidian)[Marketing ]
-                #text(size: 15pt, weight: "bold", fill: brand-mid)[Kernal] \
+                #text(size: 15.5pt, weight: "bold", fill: brand-obsidian)[Marketing ]
+                #text(size: 15.5pt, weight: "bold", fill: brand-mid)[Kernal] \
                 #v(-3pt)
-                #text(size: 5.5pt, weight: "bold", fill: text-muted, spacing: 180%)[AI-POWERED GROWTH & VISIBILITY PARTNER] \
+                #text(size: 5.6pt, weight: "bold", fill: text-muted, spacing: 180%)[AI-POWERED GROWTH & VISIBILITY PARTNER] \
                 #v(-4pt)
-                #text(size: 6.5pt, fill: rgb("#94A3B8"))[Marketing Kernal Private Limited]
+                #text(size: 6.8pt, fill: rgb("#94A3B8"))[Marketing Kernal Private Limited]
               ]
             )
           ],
           [
-            #set text(font: ("Plus Jakarta Sans", "Inter", "Arial"), size: 7.5pt, fill: text-muted, spacing: 120%)
+            #set text(font: ("Plus Jakarta Sans", "Inter", "Arial"), size: 7.2pt, fill: text-muted, spacing: 120%)
             #align(right)[
-              *CIN: U74999MH2026PTC000000* \
+              *Marketing Kernal Private Limited* \
+              *CIN: U62011ME2026PTC477307* \
               Web: #link("https://marketingkernal.com")[marketingkernal.com] \
               Email: #link("mailto:info@marketingkernal.com")[info@marketingkernal.com] \
               Tel: +91 9172648748
@@ -92,7 +94,7 @@
             #set text(font: ("Plus Jakarta Sans", "Inter", "Arial"), size: 8pt, fill: text-muted)
             #image("../assets/mk-icon.png", width: 0.5cm)
             #h(6pt)
-            *MARKETING KERNAL* | #doc-ref
+            *MARKETING KERNAL PRIVATE LIMITED* | #doc-ref
           ],
           [
             #set text(font: ("Plus Jakarta Sans", "Inter", "Arial"), size: 8pt, fill: text-muted)
@@ -104,7 +106,7 @@
       }
     },
     
-    // Footer: Corporate Jurisdiction & Page Counter
+    // Footer: Corporate Headquarters, Official Registered Address & Page Counter
     footer: context {
       let page-num = counter(page).get().first()
       let total-pages = counter(page).final().first()
@@ -116,8 +118,8 @@
         align: (left + top, right + top),
         [
           #set text(font: ("Plus Jakarta Sans", "Inter", "Arial"), size: 6.8pt, fill: text-muted)
-          *Marketing Kernal Private Limited* &bull; India &bull; Global Operations: US, UK, Canada \
-          *Confidentiality:* Privileged corporate communication issued under official governance standards.
+          *Regd. Office:* Marketing Kernal Private Limited, Awasti Layout, Big Umari, Jatherpeth, Akola, Maharashtra, India - 444005 \
+          *CIN:* U62011ME2026PTC477307 &bull; *Confidentiality:* Privileged communication issued under official governance standards.
         ],
         [
           #set text(font: ("Plus Jakarta Sans", "Inter", "Arial"), size: 7.5pt, fill: brand-deep, weight: "bold")

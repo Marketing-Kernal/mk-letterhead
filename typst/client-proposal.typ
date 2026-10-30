@@ -12,9 +12,9 @@
     London E14 5AA, United Kingdom
   ],
   subject: "Statement of Work: Next-Gen AI Visibility, Generative Engine Optimization & Entity PR",
-  signatory-name: "Vaibhav Palhade",
-  signatory-title: "Co-Founder & Head of Operations",
-  signatory-dept: "Client Delivery & AI Strategy",
+  signatory-name: "Mr. Vaibhav Palhade",
+  signatory-title: "Director",
+  signatory-dept: "Marketing Kernal Private Limited",
   include-signature: true,
   watermark: true
 )
@@ -60,4 +60,3 @@ To accept this proposal and authorize project mobilization, please countersign b
     Date: ________________________________
   ]
 )
-

@@ -1,9 +1,139 @@
 // ==============================================================================
-// MARKETING KERNAL - CORPORATE LETTERHEAD STUDIO CONTROLLER
-// Real-time two-way reactive preview, preset loaders & print-to-PDF dispatch
+// MARKETING KERNAL PRIVATE LIMITED - CORPORATE LETTERHEAD STUDIO CONTROLLER
+// Signatory: Mr. Vaibhav Palhade, Director, Marketing Kernal Private Limited
+// CIN: U62011ME2026PTC477307 | Akola, Maharashtra, India - 444005
 // ==============================================================================
 
+const SIGNATORIES = {
+  vaibhav: {
+    name: "Mr. Vaibhav Palhade",
+    title: "Director",
+    dept: "Marketing Kernal Private Limited"
+  },
+  pratyush: {
+    name: "Pratyush Shrivastava",
+    title: "Co-Founder & Director",
+    dept: "Executive Leadership & Growth Strategy"
+  },
+  tejas: {
+    name: "Tejas Guruo",
+    title: "Co-Founder & Director",
+    dept: "People Operations & Engineering"
+  }
+};
+
 const PRESETS = {
+  // ==========================================
+  // BLANK TEMPLATES (CLEAN CANVAS)
+  // ==========================================
+  blank_letter: {
+    docType: "OFFICIAL CORRESPONDENCE",
+    docRef: "MK/2026/DOC-001",
+    date: new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
+    recipientName: "",
+    recipientTitle: "",
+    recipientCompany: "",
+    recipientAddress: "",
+    subject: "",
+    salutation: "Dear Sir/Madam,",
+    body: `<p>Please enter your document text here. You can write paragraphs, bullet lists, or paste text directly.</p>`,
+    signatory: "vaibhav",
+    showSignature: true,
+    showWatermark: true
+  },
+
+  blank_memo: {
+    docType: "INTERNAL MEMORANDUM",
+    docRef: "MK/2026/MEMO-001",
+    date: new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
+    recipientName: "All Departments & Teams",
+    recipientTitle: "Internal Distribution",
+    recipientCompany: "Marketing Kernal Private Limited",
+    recipientAddress: "Akola / Remote Teams",
+    subject: "Internal Operational Directive",
+    salutation: "To All Team Members,",
+    body: `<p>Please enter the memorandum contents here.</p>`,
+    signatory: "vaibhav",
+    showSignature: true,
+    showWatermark: true
+  },
+
+  // ==========================================
+  // COMMERCIAL & CLIENT SOW
+  // ==========================================
+  proposal: {
+    docType: "COMMERCIAL PROPOSAL & SOW",
+    docRef: "MK/2026/SOW-GEO-044",
+    date: "October 30, 2026",
+    recipientName: "Strategic Acquisitions & Marketing Committee",
+    recipientTitle: "Chief Marketing Officer",
+    recipientCompany: "HyperScale Cloud Systems Ltd.",
+    recipientAddress: "One Canada Square, Canary Wharf\nLondon E14 5AA, United Kingdom",
+    subject: "Statement of Work: Next-Gen AI Visibility, Generative Engine Optimization & Entity PR",
+    salutation: "Dear Leadership Team,",
+    body: `<p><strong>Marketing Kernal Private Limited</strong> is delighted to submit this formal Commercial Proposal and Scope of Work (SOW) designed to position HyperScale Cloud Systems Ltd. as the definitive solution within generative search engines worldwide.</p>
+<h4>Scope of Deliverables & Timeline:</h4>
+<ul>
+  <li><strong>Phase 1: Entity Audit (Weeks 1 - 2):</strong> Comprehensive audit of AI citations, knowledge panels, and LLM brand perception across Gemini, ChatGPT, Claude, and Perplexity.</li>
+  <li><strong>Phase 2: GEO & PR Blueprint (Weeks 3 - 6):</strong> Publication of verified entity nodes, digital PR placements, and structured knowledge-base synthesis.</li>
+  <li><strong>Phase 3: AI Agent Automation (Weeks 7 - 10):</strong> Custom automated monitoring agent deployment to continuously track prompt share of voice.</li>
+</ul>
+<p><strong>Commercial Terms & Investment:</strong> Total engagement fee is $14,500 USD (Net of statutory taxes), billed 40% upon mobilization, 30% at Milestone 2, and 30% upon final delivery. This commercial proposal remains firm and valid for 30 calendar days from the date of issuance.</p>
+<p>To accept this proposal and authorize project mobilization, please countersign and return a scanned copy to info@marketingkernal.com.</p>`,
+    signatory: "vaibhav",
+    showSignature: true,
+    showWatermark: true
+  },
+
+  retainer: {
+    docType: "SERVICE RETAINER AGREEMENT",
+    docRef: "MK/2026/RET-015",
+    date: "October 30, 2026",
+    recipientName: "Enterprise Brand Growth Division",
+    recipientTitle: "Managing Director",
+    recipientCompany: "Global Horizon Media Corp",
+    recipientAddress: "55 Wall Street, Suite 1200\nNew York, NY 10005, United States",
+    subject: "Monthly Retainer Agreement for Continuous Generative Engine Visibility",
+    salutation: "Dear Directors,",
+    body: `<p>This letter formalizes the ongoing monthly retainer agreement under which <strong>Marketing Kernal Private Limited</strong> will provide enterprise AI Discovery, Generative Engine Optimization, and Knowledge-Graph Maintenance services.</p>
+<h4>Retainer Inclusions:</h4>
+<ul>
+  <li>Monthly generative citation benchmarking across top AI search engines.</li>
+  <li>Real-time entity defense against competitive brand displacement.</li>
+  <li>Dedicated AI engineering support and continuous digital PR syndication.</li>
+</ul>
+<p>Monthly fee: $5,000 USD billed on the 1st of each calendar month on Net-15 terms.</p>`,
+    signatory: "vaibhav",
+    showSignature: true,
+    showWatermark: true
+  },
+
+  quotation: {
+    docType: "COMMERCIAL QUOTATION",
+    docRef: "MK/2026/QT-089",
+    date: "October 30, 2026",
+    recipientName: "Procurement & Finance Department",
+    recipientTitle: "Director of Procurement",
+    recipientCompany: "Apex Innovations Inc.",
+    recipientAddress: "700 Tech Gateway Boulevard\nAustin, TX 78701, USA",
+    subject: "Formal Quotation: Entity SEO & Multimodal Search Deployment",
+    salutation: "Dear Procurement Team,",
+    body: `<p>We are pleased to provide the official pricing quotation for the requested technical search and AI optimization sprint.</p>
+<h4>Investment Breakdown:</h4>
+<ul>
+  <li><strong>Comprehensive Entity Graph Reconstruction:</strong> $6,500 USD</li>
+  <li><strong>Digital PR & Citation Authority Syndication:</strong> $4,800 USD</li>
+  <li><strong>Automated Monitoring Intelligence Dashboard:</strong> $2,200 USD</li>
+</ul>
+<p><strong>Total Investment:</strong> $13,500 USD (Applicable taxes as per Indian corporate export provisions).</p>`,
+    signatory: "vaibhav",
+    showSignature: true,
+    showWatermark: true
+  },
+
+  // ==========================================
+  // CORPORATE & GOVERNANCE
+  // ==========================================
   formal: {
     docType: "OFFICIAL CORRESPONDENCE",
     docRef: "MK/2026/CORR-102",
@@ -24,56 +154,7 @@ const PRESETS = {
 </ol>
 <p>This communication and any accompanying technical annexures are subject to strict non-disclosure obligations. Both parties agree that proprietary architectures, benchmark data, and algorithmic strategies shared during this evaluation shall remain confidential.</p>
 <p>We look forward to initiating our collaborative technical sprint and helping your organization establish undisputed authority in the era of generative discovery.</p>`,
-    signatory: "pratyush",
-    showSignature: true,
-    showWatermark: true
-  },
-
-  proposal: {
-    docType: "COMMERCIAL PROPOSAL & SOW",
-    docRef: "MK/2026/SOW-GEO-044",
-    date: "October 30, 2026",
-    recipientName: "Strategic Acquisitions & Marketing Committee",
-    recipientTitle: "Chief Marketing Officer",
-    recipientCompany: "HyperScale Cloud Systems Ltd.",
-    recipientAddress: "One Canada Square, Canary Wharf\nLondon E14 5AA, United Kingdom",
-    subject: "Statement of Work: Next-Gen AI Visibility, Generative Engine Optimization & Entity PR",
-    salutation: "Dear Leadership Team,",
-    body: `<p><strong>Marketing Kernal Private Limited</strong> is delighted to submit this formal Commercial Proposal and Scope of Work (SOW) designed to position HyperScale Cloud Systems Ltd. as the definitive solution within generative search engines worldwide.</p>
-<h4>Scope of Deliverables & Timeline:</h4>
-<ul>
-  <li><strong>Phase 1: Entity Audit (Weeks 1 - 2):</strong> Comprehensive audit of AI citations, knowledge panels, and LLM brand perception across Gemini, ChatGPT, and Perplexity.</li>
-  <li><strong>Phase 2: GEO & PR Blueprint (Weeks 3 - 6):</strong> Publication of verified entity nodes, digital PR placements, and structured knowledge-base synthesis.</li>
-  <li><strong>Phase 3: AI Agent Automation (Weeks 7 - 10):</strong> Custom automated monitoring agent deployment to continuously track prompt share of voice.</li>
-</ul>
-<p><strong>Commercial Terms & Investment:</strong> Total engagement fee is $14,500 USD (Net of statutory taxes), billed 40% upon mobilization, 30% at Milestone 2, and 30% upon final delivery. This commercial proposal remains firm and valid for 30 calendar days from the date of issuance.</p>
-<p>To accept this proposal and authorize project mobilization, please countersign and return a scanned copy to info@marketingkernal.com.</p>`,
     signatory: "vaibhav",
-    showSignature: true,
-    showWatermark: true
-  },
-
-  offer: {
-    docType: "OFFICIAL EMPLOYMENT OFFER",
-    docRef: "MK/2026/HR-OFF-019",
-    date: "October 30, 2026",
-    recipientName: "Aarav Sharma",
-    recipientTitle: "Prospective Team Member",
-    recipientCompany: "",
-    recipientAddress: "Flat 402, Green Meadows Residency\nPune, Maharashtra 411038, India",
-    subject: "Offer of Employment: Senior AI Growth Engineer & GEO Strategist",
-    salutation: "Dear Aarav,",
-    body: `<p>On behalf of <strong>Marketing Kernal Private Limited</strong>, we are thrilled to extend this formal offer of employment for the position of <strong>Senior AI Growth Engineer &amp; GEO Strategist</strong>.</p>
-<p>We were deeply impressed by your technical proficiency, strategic vision in generative discovery architectures, and cultural alignment with Marketing Kernal's mission to pioneer the next generation of digital marketing.</p>
-<h4>Summary of Terms & Compensation:</h4>
-<ul>
-  <li><strong>Position Title:</strong> Senior AI Growth Engineer &amp; GEO Strategist</li>
-  <li><strong>Department:</strong> Artificial Intelligence &amp; Search Innovation</li>
-  <li><strong>Work Mode:</strong> Hybrid / Remote-First with flexible core hours</li>
-  <li><strong>Annual CTC:</strong> INR 18,00,000 (Eighteen Lakhs Rupees Only) per annum, structured as per company compensation standards, inclusive of performance bonuses and medical coverage.</li>
-</ul>
-<p>Please confirm your formal acceptance by signing and dating this document below and returning a scanned copy within five (5) business days. We look forward to welcoming you to the Marketing Kernal team!</p>`,
-    signatory: "tejas",
     showSignature: true,
     showWatermark: true
   },
@@ -96,27 +177,95 @@ const PRESETS = {
   <li>Shared benchmarking of LLM hallucination resistance regarding brand attributes.</li>
 </ul>
 <p>This document reflects mutual intent and sets forth the foundational principles for binding commercial contracts to be executed within sixty (60) calendar days.</p>`,
-    signatory: "pratyush",
+    signatory: "vaibhav",
     showSignature: true,
     showWatermark: true
-  }
-};
+  },
 
-const SIGNATORIES = {
-  pratyush: {
-    name: "Pratyush Shrivastava",
-    title: "Co-Founder & Director",
-    dept: "Executive Leadership & Growth"
+  authority: {
+    docType: "LETTER OF AUTHORITY",
+    docRef: "MK/2026/LOA-003",
+    date: "October 30, 2026",
+    recipientName: "To Whomsoever It May Concern",
+    recipientTitle: "",
+    recipientCompany: "All Regulatory & Commercial Authorities",
+    recipientAddress: "India / International",
+    subject: "Letter of Authority & Representation for Marketing Kernal Private Limited",
+    salutation: "To Whomsoever It May Concern,",
+    body: `<p>This is to certify that <strong>Marketing Kernal Private Limited</strong> (CIN: U62011ME2026PTC477307), having its registered office at Awasti Layout, Big Umari, Jatherpeth, Akola, Maharashtra, India - 444005, hereby authorizes the bearer of this letter to represent the company in corporate and contractual affairs as designated.</p>
+<p>This authorization is issued pursuant to board resolutions and remains valid until expressly revoked in writing.</p>`,
+    signatory: "vaibhav",
+    showSignature: true,
+    showWatermark: true
   },
-  vaibhav: {
-    name: "Vaibhav Palhade",
-    title: "Co-Founder & Director",
-    dept: "Client Delivery & AI Strategy"
+
+  // ==========================================
+  // PEOPLE & HUMAN RESOURCES
+  // ==========================================
+  offer: {
+    docType: "OFFICIAL EMPLOYMENT OFFER",
+    docRef: "MK/2026/HR-OFF-019",
+    date: "October 30, 2026",
+    recipientName: "Aarav Sharma",
+    recipientTitle: "Prospective Team Member",
+    recipientCompany: "",
+    recipientAddress: "Flat 402, Green Meadows Residency\nPune, Maharashtra 411038, India",
+    subject: "Offer of Employment: Senior AI Growth Engineer & GEO Strategist",
+    salutation: "Dear Aarav,",
+    body: `<p>On behalf of <strong>Marketing Kernal Private Limited</strong>, we are thrilled to extend this formal offer of employment for the position of <strong>Senior AI Growth Engineer &amp; GEO Strategist</strong>.</p>
+<p>We were deeply impressed by your technical proficiency, strategic vision in generative discovery architectures, and cultural alignment with Marketing Kernal's mission to pioneer the next generation of digital marketing.</p>
+<h4>Summary of Terms & Compensation:</h4>
+<ul>
+  <li><strong>Position Title:</strong> Senior AI Growth Engineer &amp; GEO Strategist</li>
+  <li><strong>Department:</strong> Artificial Intelligence &amp; Search Innovation</li>
+  <li><strong>Work Mode:</strong> Hybrid / Remote-First with flexible core hours</li>
+  <li><strong>Annual CTC:</strong> INR 18,00,000 (Eighteen Lakhs Rupees Only) per annum, structured as per company compensation standards, inclusive of performance bonuses and medical coverage.</li>
+</ul>
+<p>Please confirm your formal acceptance by signing and dating this document below and returning a scanned copy within five (5) business days. We look forward to welcoming you to the Marketing Kernal team!</p>`,
+    signatory: "vaibhav",
+    showSignature: true,
+    showWatermark: true
   },
-  tejas: {
-    name: "Tejas Guruo",
-    title: "Co-Founder & Director",
-    dept: "People Operations & Engineering"
+
+  internship: {
+    docType: "INTERNSHIP APPOINTMENT LETTER",
+    docRef: "MK/2026/HR-INT-008",
+    date: "October 30, 2026",
+    recipientName: "Rohan Deshmukh",
+    recipientTitle: "AI Research & Digital Growth Intern",
+    recipientCompany: "",
+    recipientAddress: "Shivaji Nagar, Akola, Maharashtra - 444001",
+    subject: "Appointment Letter for AI Marketing & GEO Research Internship",
+    salutation: "Dear Rohan,",
+    body: `<p>We are delighted to offer you an internship position as <strong>AI Research & Digital Growth Intern</strong> at <strong>Marketing Kernal Private Limited</strong>.</p>
+<h4>Internship Terms:</h4>
+<ul>
+  <li><strong>Duration:</strong> 3 Months (Commencing November 15, 2026)</li>
+  <li><strong>Stipend:</strong> INR 25,000 per month</li>
+  <li><strong>Scope:</strong> LLM prompt benchmarking, entity node indexing, and automated content discovery sprints.</li>
+</ul>
+<p>Upon successful completion of the internship, you will be eligible for a full-time consideration and certificate of excellence.</p>`,
+    signatory: "vaibhav",
+    showSignature: true,
+    showWatermark: true
+  },
+
+  experience: {
+    docType: "EXPERIENCE & RELIEVING CERTIFICATE",
+    docRef: "MK/2026/EXP-012",
+    date: "October 30, 2026",
+    recipientName: "To Whomsoever It May Concern",
+    recipientTitle: "",
+    recipientCompany: "",
+    recipientAddress: "",
+    subject: "Service Experience & Relieving Certificate",
+    salutation: "To Whomsoever It May Concern,",
+    body: `<p>This is to certify that <strong>Ms. Ananya Joshi</strong> was employed with <strong>Marketing Kernal Private Limited</strong> from January 15, 2025 to October 15, 2026 as a <strong>Senior SEO & AI Visibility Specialist</strong>.</p>
+<p>During her tenure with us, she exhibited high professionalism, analytical capability, and dedication. She has been formally relieved of her duties at the close of business hours on October 15, 2026.</p>
+<p>We wish her every success in her future career endeavors.</p>`,
+    signatory: "vaibhav",
+    showSignature: true,
+    showWatermark: true
   }
 };
 
@@ -160,6 +309,25 @@ const viewSignatoryTitle = document.getElementById("viewSignatoryTitle");
 const viewSignatoryDept = document.getElementById("viewSignatoryDept");
 const sheetWatermark = document.getElementById("sheetWatermark");
 
+// DOM References - Smart Import Modal
+const openImportModalBtn = document.getElementById("openImportModalBtn");
+const closeImportModalBtn = document.getElementById("closeImportModalBtn");
+const cancelImportBtn = document.getElementById("cancelImportBtn");
+const importModal = document.getElementById("importModal");
+const fileDropzone = document.getElementById("fileDropzone");
+const fileInput = document.getElementById("fileInput");
+const importRawText = document.getElementById("importRawText");
+const importStatus = document.getElementById("importStatus");
+const toggleAiEnhance = document.getElementById("toggleAiEnhance");
+const aiKeyGroup = document.getElementById("aiKeyGroup");
+const geminiApiKey = document.getElementById("geminiApiKey");
+const processImportBtn = document.getElementById("processImportBtn");
+
+// Load stored API key if present
+if (localStorage.getItem("mk_gemini_api_key")) {
+  geminiApiKey.value = localStorage.getItem("mk_gemini_api_key");
+}
+
 // Sync Functions
 function updatePreview() {
   viewDocType.textContent = inputDocType.value || "OFFICIAL CORRESPONDENCE";
@@ -180,7 +348,7 @@ function updatePreview() {
 
   // Subject
   if (inputSubject.value.trim()) {
-    viewSubjectBanner.style.display = "block";
+    viewSubjectBanner.style.display = "flex";
     viewSubject.textContent = inputSubject.value;
   } else {
     viewSubjectBanner.style.display = "none";
@@ -199,9 +367,9 @@ function updatePreview() {
   }
 
   // Signatory
-  viewSignatoryName.textContent = inputSignatoryName.value || "Authorized Signatory";
+  viewSignatoryName.textContent = inputSignatoryName.value || "Mr. Vaibhav Palhade";
   viewSignatoryTitle.textContent = inputSignatoryTitle.value || "Director";
-  viewSignatoryDept.textContent = inputSignatoryDept.value || "Executive Leadership";
+  viewSignatoryDept.textContent = inputSignatoryDept.value || "Marketing Kernal Private Limited";
 
   // Toggles
   if (toggleSignature.checked) {
@@ -219,8 +387,7 @@ function updatePreview() {
 
 // Preset Loader
 function loadPreset(key) {
-  const data = PRESETS[key];
-  if (!data) return;
+  const data = PRESETS[key] || PRESETS.formal;
 
   inputDocType.value = data.docType;
   inputDocRef.value = data.docRef;
@@ -277,20 +444,11 @@ templatePreset.addEventListener("change", (e) => {
   loadPreset(e.target.value);
 });
 
-// Reset Button
+// Reset Button -> Clean Blank Canvas
 resetBtn.addEventListener("click", () => {
-  if (confirm("Reset letterhead editor to blank template?")) {
-    inputDocType.value = "OFFICIAL CORRESPONDENCE";
-    inputDocRef.value = "MK/2026/DOC-001";
-    inputDate.value = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
-    inputRecipientName.value = "";
-    inputRecipientTitle.value = "";
-    inputRecipientCompany.value = "";
-    inputRecipientAddress.value = "";
-    inputSubject.value = "";
-    inputSalutation.value = "Dear Sir/Madam,";
-    inputBody.value = "<p>Please enter your document text here...</p>";
-    updatePreview();
+  if (confirm("Reset to a blank Marketing Kernal letterhead?")) {
+    templatePreset.value = "blank_letter";
+    loadPreset("blank_letter");
   }
 });
 
@@ -299,8 +457,284 @@ printBtn.addEventListener("click", () => {
   window.print();
 });
 
+// ==============================================================================
+// SMART DOCUMENT IMPORT & AI FORMATTER LOGIC
+// ==============================================================================
+
+// Open / Close Modal
+openImportModalBtn.addEventListener("click", () => {
+  importModal.style.display = "flex";
+  importStatus.style.display = "none";
+});
+
+function closeModal() {
+  importModal.style.display = "none";
+}
+
+closeImportModalBtn.addEventListener("click", closeModal);
+cancelImportBtn.addEventListener("click", closeModal);
+importModal.addEventListener("click", (e) => {
+  if (e.target === importModal) closeModal();
+});
+
+// AI Key Toggle
+toggleAiEnhance.addEventListener("change", (e) => {
+  aiKeyGroup.style.display = e.target.checked ? "block" : "none";
+});
+
+// Dropzone Click & Drag
+fileDropzone.addEventListener("click", () => fileInput.click());
+fileDropzone.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  fileDropzone.classList.add("dragover");
+});
+fileDropzone.addEventListener("dragleave", () => {
+  fileDropzone.classList.remove("dragover");
+});
+fileDropzone.addEventListener("drop", (e) => {
+  e.preventDefault();
+  fileDropzone.classList.remove("dragover");
+  if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+    handleFile(e.dataTransfer.files[0]);
+  }
+});
+
+fileInput.addEventListener("change", (e) => {
+  if (e.target.files && e.target.files[0]) {
+    handleFile(e.target.files[0]);
+  }
+});
+
+function showStatus(msg, type = "info") {
+  importStatus.textContent = msg;
+  importStatus.className = `import-status ${type}`;
+  importStatus.style.display = "block";
+}
+
+// File Reading & Parsing
+async function handleFile(file) {
+  showStatus(`Reading "${file.name}"...`, "info");
+  const ext = file.name.split('.').pop().toLowerCase();
+
+  try {
+    if (ext === "docx" || ext === "doc") {
+      if (typeof mammoth !== "undefined") {
+        const arrayBuffer = await file.arrayBuffer();
+        const result = await mammoth.convertToHtml({ arrayBuffer });
+        importRawText.value = result.value.replace(/<[^>]+>/g, '\n');
+        showStatus(`Extracted content from Word document "${file.name}". Click "Apply to Letterhead" below.`, "success");
+      } else {
+        showStatus("Word parser loading. Please paste text directly if offline.", "error");
+      }
+    } else if (ext === "pdf") {
+      if (typeof pdfjsLib !== "undefined") {
+        const arrayBuffer = await file.arrayBuffer();
+        const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        let fullText = "";
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const textContent = await page.getTextContent();
+          const pageText = textContent.items.map(item => item.str).join(" ");
+          fullText += pageText + "\n\n";
+        }
+        importRawText.value = fullText;
+        showStatus(`Extracted ${pdf.numPages} page(s) from PDF "${file.name}". Click "Apply to Letterhead" below.`, "success");
+      } else {
+        showStatus("PDF parser loading. Please paste text directly if offline.", "error");
+      }
+    } else {
+      // Plain text, markdown, json
+      const text = await file.text();
+      importRawText.value = text;
+      showStatus(`Loaded "${file.name}". Click "Apply to Letterhead" below.`, "success");
+    }
+  } catch (err) {
+    console.error("Error reading file:", err);
+    showStatus(`Failed to read file: ${err.message}`, "error");
+  }
+}
+
+// Intelligent Heuristic Document Extractor
+function parseDocumentHeuristically(raw) {
+  const lines = raw.split("\n").map(l => l.trim()).filter(Boolean);
+  let docType = "OFFICIAL CORRESPONDENCE";
+  let docRef = "MK/2026/DOC-" + Math.floor(100 + Math.random() * 900);
+  let date = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  let recipientName = "";
+  let recipientTitle = "";
+  let recipientCompany = "";
+  let recipientAddress = "";
+  let subject = "";
+  let salutation = "Dear Sir/Madam,";
+  const bodyParagraphs = [];
+
+  let inRecipient = false;
+  let recipientLines = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
+    // Detect Date
+    if (/^(Date\s*:|Dated\s*:)/i.test(line)) {
+      date = line.replace(/^(Date\s*:|Dated\s*:)/i, "").trim();
+      continue;
+    }
+
+    // Detect Ref
+    if (/^(Ref\s*:|Reference\s*:)/i.test(line)) {
+      docRef = line.replace(/^(Ref\s*:|Reference\s*:)/i, "").trim();
+      continue;
+    }
+
+    // Detect Subject
+    if (/^(Subject\s*:|Sub\s*:|Re\s*:)/i.test(line)) {
+      subject = line.replace(/^(Subject\s*:|Sub\s*:|Re\s*:)/i, "").trim();
+      inRecipient = false;
+      continue;
+    }
+
+    // Detect Salutation
+    if (/^(Dear|To Whomsoever|Respected|Hello|Greetings)/i.test(line)) {
+      salutation = line;
+      inRecipient = false;
+      continue;
+    }
+
+    // Detect Recipient block
+    if (/^(To\s*:|Attention\s*:|Attn\s*:)/i.test(line)) {
+      inRecipient = true;
+      const stripped = line.replace(/^(To\s*:|Attention\s*:|Attn\s*:)/i, "").trim();
+      if (stripped) recipientLines.push(stripped);
+      continue;
+    }
+
+    if (inRecipient) {
+      if (line.length > 0 && !/^(Subject|Dear|Dated|Ref)/i.test(line)) {
+        recipientLines.push(line);
+        if (recipientLines.length >= 4) inRecipient = false;
+        continue;
+      } else {
+        inRecipient = false;
+      }
+    }
+
+    // Regular body paragraphs
+    bodyParagraphs.push(line);
+  }
+
+  // Parse recipient lines
+  if (recipientLines.length > 0) {
+    recipientName = recipientLines[0] || "";
+    recipientTitle = recipientLines[1] || "";
+    recipientCompany = recipientLines[2] || "";
+    recipientAddress = recipientLines.slice(3).join("\n");
+  }
+
+  const formattedBody = bodyParagraphs.length > 0
+    ? bodyParagraphs.map(p => `<p>${p}</p>`).join("")
+    : "<p>" + raw.replace(/\n\n/g, "</p><p>") + "</p>";
+
+  return {
+    docType,
+    docRef,
+    date,
+    recipientName,
+    recipientTitle,
+    recipientCompany,
+    recipientAddress,
+    subject: subject || "Corporate Communication",
+    salutation,
+    body: formattedBody
+  };
+}
+
+// AI Formatter via Gemini API
+async function formatWithGemini(rawText, apiKey) {
+  showStatus("Processing with Gemini AI...", "info");
+  const prompt = `You are an executive correspondence assistant for "Marketing Kernal Private Limited".
+Convert the following unstructured draft or document into a polished, formal corporate letter.
+Return strictly a valid JSON object without markdown formatting, following this exact schema:
+{
+  "docType": "OFFICIAL CORRESPONDENCE" or appropriate uppercase document category,
+  "docRef": "MK/2026/...",
+  "date": "Month Day, Year",
+  "recipientName": "Name if found",
+  "recipientTitle": "Title if found",
+  "recipientCompany": "Company if found",
+  "recipientAddress": "Address if found",
+  "subject": "Clear, professional executive subject line",
+  "salutation": "Formal salutation",
+  "body": "HTML formatted body using <p>, <h4>, <ul>, <li> tags with polished corporate tone"
+}
+
+Draft Document:
+${rawText}`;
+
+  const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      contents: [{ parts: [{ text: prompt }] }]
+    })
+  });
+
+  if (!res.ok) {
+    const errData = await res.json();
+    throw new Error(errData.error?.message || "Failed to communicate with Gemini API");
+  }
+
+  const data = await res.json();
+  const textOutput = data.candidates?.[0]?.content?.parts?.[0]?.text;
+  const cleaned = textOutput.replace(/```json/g, "").replace(/```/g, "").trim();
+  return JSON.parse(cleaned);
+}
+
+// Apply Processed Import to Studio
+processImportBtn.addEventListener("click", async () => {
+  const raw = importRawText.value.trim();
+  if (!raw) {
+    showStatus("Please paste text or upload a file first.", "error");
+    return;
+  }
+
+  try {
+    let result;
+    const apiKey = geminiApiKey.value.trim();
+
+    if (toggleAiEnhance.checked && apiKey) {
+      localStorage.setItem("mk_gemini_api_key", apiKey);
+      result = await formatWithGemini(raw, apiKey);
+    } else {
+      result = parseDocumentHeuristically(raw);
+    }
+
+    // Apply to Letterhead
+    inputDocType.value = result.docType || "OFFICIAL CORRESPONDENCE";
+    inputDocRef.value = result.docRef || "MK/2026/DOC-108";
+    inputDate.value = result.date || new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+    inputRecipientName.value = result.recipientName || "";
+    inputRecipientTitle.value = result.recipientTitle || "";
+    inputRecipientCompany.value = result.recipientCompany || "";
+    inputRecipientAddress.value = result.recipientAddress || "";
+    inputSubject.value = result.subject || "";
+    inputSalutation.value = result.salutation || "Dear Sir/Madam,";
+    inputBody.value = result.body || "<p>" + raw + "</p>";
+
+    // Ensure Mr. Vaibhav Palhade is selected as Signatory
+    signatoryPreset.value = "vaibhav";
+    inputSignatoryName.value = SIGNATORIES.vaibhav.name;
+    inputSignatoryTitle.value = SIGNATORIES.vaibhav.title;
+    inputSignatoryDept.value = SIGNATORIES.vaibhav.dept;
+
+    updatePreview();
+    closeModal();
+  } catch (err) {
+    console.error("Import processing error:", err);
+    showStatus(`Error processing document: ${err.message}`, "error");
+  }
+});
+
 // Initialize on page load
 document.addEventListener("DOMContentLoaded", () => {
   loadPreset("formal");
 });
-

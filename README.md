@@ -2,7 +2,11 @@
 
 Official corporate stationery and automated document generation suite for **Marketing Kernal Private Limited** ([marketingkernal.com](https://marketingkernal.com)).
 
-Designed to support executive correspondence, client proposals, Statements of Work (SOW), HR employment letters, and partnership MoUs with pixel-perfect brand consistency across both developer and non-developer workflows.
+* **CIN:** `U62011ME2026PTC477307`
+* **Registered Office:** Awasti Layout, Big Umari, Jatherpeth, Akola, Maharashtra, India, - 444005
+* **Official Signatory:** Mr. Vaibhav Palhade, Director, Marketing Kernal Private Limited
+* **Official Website:** [marketingkernal.com](https://marketingkernal.com) | **Email:** [info@marketingkernal.com](mailto:info@marketingkernal.com) | **Tel:** +91 9172648748
+* **Live Web Studio:** [https://marketing-kernal.github.io/mk-letterhead/](https://marketing-kernal.github.io/mk-letterhead/)
 
 ---
 
@@ -13,15 +17,16 @@ This repository is built as a **hybrid suite** providing two synchronized docume
 ```
 MK Letterhead/
 ├── assets/                          # Official vector logos, marks & watermarks
-│   ├── logo-horizontal.svg          # Primary corporate logo for headers
-│   ├── logo-icon.svg                # Kernel AI emblem
-│   ├── watermark.svg                # Document security background watermark
+│   ├── mk-icon.png                  # Transparent RGBA ultraviolet ribbon emblem
+│   ├── mk-monogram.png              # Wide transparent monogram
+│   ├── watermark.svg                # Background security watermark
 │   └── signature-placeholder.svg    # Digital verification stamp
 │
 ├── web-studio/                      # Engine 1: Interactive Browser Studio
 │   ├── index.html                   # Side-by-side reactive editor & A4 live preview
 │   ├── styles.css                   # Print-perfect CSS (@page { size: A4; })
-│   └── app.js                       # 2-way data binding, presets & PDF export
+│   ├── app.js                       # 2-way data binding, presets & Smart Doc / AI import
+│   └── assets/                      # Self-contained assets for cloud hosting
 │
 ├── typst/                           # Engine 2: Typst Typesetting Engine
 │   ├── mk-branding.typ              # Core branding layout & typography rules
@@ -42,66 +47,38 @@ MK Letterhead/
 
 ---
 
-## 🚀 Engine 1: Interactive Web Studio (Zero Installation)
+## 🚀 Engine 1: Interactive Web Studio & Smart AI Formatter
 
-The **Letterhead Web Studio** is a browser-based application with real-time A4 preview, built for fast day-to-day use by founders, client account leads, HR, and marketing teams.
+The **Letterhead Web Studio** is hosted live at **[https://marketing-kernal.github.io/mk-letterhead/](https://marketing-kernal.github.io/mk-letterhead/)** and requires zero installation.
 
-### How to Run Locally
-
-You can launch the studio in any terminal with Node.js installed:
-
-```bash
-# 1. Start the zero-dependency local server
-npm start
-# (or: node server.js)
-
-# 2. Open your browser at:
-http://localhost:3000/web-studio/index.html
-```
-
-*(You can also simply double-click `web-studio/index.html` to open it directly in Google Chrome, Microsoft Edge, or Safari without a server!)*
-
-### Features
-- **Live Two-Way Reactive Preview**: As you edit recipient details, reference IDs, dates, subjects, or body text on the left, the A4 page on the right updates instantly.
-- **One-Click Presets**:
-  - `Official Correspondence` (General notices, client letters)
-  - `Client Proposal & SOW` (Deliverable tables, pricing, milestones)
-  - `HR Employment Offer` (CTC breakdown, position terms)
-  - `Partnership MoU` (Collaborative research agreements)
-- **Signatory Switching**: Quickly select between co-founders (**Pratyush Shrivastava**, **Vaibhav Palhade**, **Tejas Guruo**) or enter custom signatory details.
-- **Toggles**: Enable/disable background watermarks and digital signature verification stamps.
-- **Print to PDF**: Click **"Print to PDF (A4)"** (or press `Ctrl+P`) to export an authentic A4 PDF with zero margins, exact color fidelity, and no browser UI clutter.
+### Key Features:
+1. **Clean Divided Categories**:
+   * **Blank Templates**: Start completely fresh with a clean blank canvas.
+   * **Commercial & Client SOW**: Client proposals, monthly service retainers, formal quotations.
+   * **Corporate & Governance**: Official correspondence, partnership MoUs, board letters of authority.
+   * **People & HR**: Employment offers, internship appointments, experience & relieving certificates.
+2. **Smart Document Import & AI Formatter**:
+   * Click **"Import Doc / AI Formatter"** in the top bar.
+   * Drop any **`.docx` (Word)**, **`.pdf`**, **`.txt`**, or **`.md`** file, or paste raw meeting notes.
+   * Automatically extracts the Date, Reference Number, Recipient, Subject, and paragraphs.
+   * Optional **Gemini AI enhancement** to polish rough notes into an executive-grade corporate tone.
+3. **Official Corporate Signatory**:
+   * Pre-configured with **Mr. Vaibhav Palhade, Director, Marketing Kernal Private Limited**.
+4. **Print to PDF (A4)**:
+   * 1-click pixel-perfect export with zero margins and background watermark support.
 
 ---
 
 ## ⚡ Engine 2: Typst Typesetting Engine (Code & CLI)
 
-Built on [Typst](https://typst.app), a next-generation Rust-based typesetting system that replaces LaTeX with blazing-fast compilation and clean, readable code.
+Built on [Typst](https://typst.app), a modern Rust-based typesetting system that replaces LaTeX:
 
-### Prerequisites
-Install the Typst CLI (or use the VS Code Typst extension):
 ```bash
-# Windows (via winget or cargo)
-winget install --id Typst.Typst
-# or: cargo install typst-cli
-```
-
-### Compiling to PDF
-```bash
-# Compile a formal letter to PDF
+# Compile to PDF:
 typst compile typst/formal-letter.typ output/formal-letter.pdf
-
-# Watch mode (live recompile on every save)
-typst watch typst/formal-letter.typ
-
-# High-resolution raster preview (300 DPI)
-typst compile --format png --ppi 300 typst/formal-letter.typ output/preview.png
+typst compile typst/client-proposal.typ output/client-proposal.pdf
+typst compile typst/hr-offer-letter.typ output/hr-offer-letter.pdf
 ```
-
-### Using in VS Code
-1. Install the **Typst** extension (`Myriad-Dreamin.tinymist`).
-2. Open any `.typ` file in `typst/`.
-3. Press `Ctrl+K V` or click "Show Preview" for an interactive live document renderer.
 
 ---
 
@@ -109,20 +86,17 @@ typst compile --format png --ppi 300 typst/formal-letter.typ output/preview.png
 
 | Token | Value / Spec | Notes |
 | :--- | :--- | :--- |
-| **Primary Navy** | `#0F172A` | Core dark corporate tone for text & headers |
-| **Electric Blue** | `#2563EB` | Primary brand accent & divider highlights |
-| **Cyan Glow** | `#0284C7` / `#06B6D4` | Accent tone representing AI / GEO data flows |
-| **Slate Gray** | `#64748B` | Subtitles, metadata, and footer notices |
+| **Royal Purple** | `#5A09D1` | Primary header accent & formal authority |
+| **Imperial Violet** | `#7C1BF0` | Brand text gradient midpoint & divider line |
+| **Ultraviolet Glow** | `#9E2CFE` | High-tech accent & active highlight bar |
+| **Obsidian Noir** | `#090714` | High-contrast luxury body text |
+| **Soft Lilac** | `#FAF5FF` | Subtle background tint for cards & badges |
 | **Paper Standard** | International A4 (`210mm x 297mm`) | Standard corporate stationery |
-| **Typography** | Inter, Segoe UI, Arial | Web-safe, clean, modern corporate sans-serif |
-| **Company CIN** | `U74999MH2026PTC000000` | Corporate Identity Number placeholder |
-| **Contact Phone** | `+91 9172648748` | Official contact line |
-| **Contact Email** | `info@marketingkernal.com` | Official correspondence email |
-| **Website** | `https://marketingkernal.com` | Corporate portal |
+| **Corporate CIN** | `U62011ME2026PTC477307` | Official Corporate Identity Number |
+| **Registered Office** | Akola, Maharashtra, India - 444005 | Awasti Layout, Big Umari, Jatherpeth |
 
 ---
 
 ## 📄 License & Proprietary Rights
 
-Copyright &copy; 2026 Marketing Kernal Private Limited. All rights reserved. Confidential and proprietary to Marketing Kernal Private Limited.
-
+Copyright &copy; 2026 Marketing Kernal Private Limited. All rights reserved.

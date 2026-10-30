@@ -10,3 +10,4 @@
   from = "/studio"
   to = "/web-studio/index.html"
   status = 200
+

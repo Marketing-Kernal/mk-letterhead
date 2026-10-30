@@ -12,9 +12,9 @@
     Pune, Maharashtra 411038, India
   ],
   subject: "Offer of Employment: Senior AI Growth Engineer & GEO Strategist",
-  signatory-name: "Tejas Guruo",
-  signatory-title: "Co-Founder & Head of Talent",
-  signatory-dept: "People Operations & Engineering",
+  signatory-name: "Mr. Vaibhav Palhade",
+  signatory-title: "Director",
+  signatory-dept: "Marketing Kernal Private Limited",
   include-signature: true,
   watermark: true
 )
@@ -63,4 +63,3 @@ We look forward to welcoming you to the Marketing Kernal team as we build the fu
     Date: ____________________________________
   ]
 )
-
